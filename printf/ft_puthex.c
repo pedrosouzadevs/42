@@ -55,10 +55,7 @@ void	ft_putnbr_base(int nbr, char *string)
 	long	nb;
 	char	*base;
 
-	if (string == (char *)'X')
-		base = "0123456789ABCDEF";
-	else
-		base = "0123456789abcdef";
+	base = string;
 	base_len = ft_strlen(base);
 	if (!is_valid(base))
 		return ;

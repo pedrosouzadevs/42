@@ -20,7 +20,7 @@
 
 int ft_printf(const char *string, ...);
 void ft_putnbr_base(int nbr, char *string);
-void ft_putptr(void *p, char *string);
+void ft_putptr(void *p);
 void ft_putunbr(int n);
 void ft_searching_porcentage(char *string, va_list args);
 void ft_putchar_fd(char c, int fd);
