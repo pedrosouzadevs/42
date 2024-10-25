@@ -6,41 +6,11 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:12:23 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/23 16:41:19 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:45:58 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-void	ft_putnbr_base(int nbr, char *base);
-void	ft_putchar(char c);
-void	ft_putnbr_base_recursive(long nbr, char *base, int base_len);
-
-int	is_valid(char *base)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	if (ft_strlen(base) <= 1)
-	{
-		return (0);
-	}
-	while (base[i])
-	{
-		if (base[i] == '+' || base[i] == '-')
-			return (0);
-		j = i + 1;
-		while (base[j])
-		{
-			if (base[i] == base[j])
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
+#include "includes/ft_printf.h"
 
 void	ft_putnbr_base_recursive(long nbr, char *base, int base_len)
 {
@@ -57,8 +27,6 @@ void	ft_putnbr_base(int nbr, char *string)
 
 	base = string;
 	base_len = ft_strlen(base);
-	if (!is_valid(base))
-		return ;
 	nb = nbr;
 	if (nb < 0)
 	{
