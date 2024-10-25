@@ -10,18 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "ft_printf.h"
 
-
-void	ft_putunbr(int n);
-void	ft_putptr(void *p, char *string);
-void	ft_putnbr_base(int nbr, char *string);
 void	ft_searching_porcentage(char *string, va_list args);
-
+void	ft_putunbr(int n);
 typedef struct t_node
 {
 	char			c;
@@ -39,9 +31,7 @@ int ft_printf(const char *string, ...)
 {
 	va_list args;
 	va_start(args, string);
-	int	i;
 
-	i = 0;
 	while (*string)
 	{
 		if (*string == '%')
@@ -55,30 +45,6 @@ int ft_printf(const char *string, ...)
 	}
 	va_end(args);
 	return (0);
-}
-
-
-void ft_putunbr(int n)
-{
-		int				fd;
-
-	fd = 1;
-	if (n < 0)
-		n = -n;
-	if (n > 9)
-		ft_putunbr(n / 10);
-	ft_putchar_fd(n % 10 + '0', fd);
-}
-
-void ft_putptr(void *p, char *string)
-{
-	unsigned long long	i;
-	int	fd;
-
-	fd = 1;
-	i = (unsigned long long)p;
-	ft_putstr_fd("0x", fd);
-	ft_putnbr_base(i, string);
 }
 
 void	ft_searching_porcentage(char *string, va_list args)
@@ -105,46 +71,58 @@ void	ft_searching_porcentage(char *string, va_list args)
 		ft_putchar_fd(*string, i);
 }
 
-#include <stdio.h>
-#include <limits.h>
-
-int main(void)
+void	ft_putunbr(int n)
 {
-    // Testando %c
-    ft_printf("Teste %c\n", 'A');
-	printf("Teste %c\n", 'A');
+		int				fd;
 
-    // Testando %s
-    ft_printf("Teste %s\n", "Hello, World!");
-	printf("Teste %s\n", "Hello, World!");
-
-    // Testando %p
-    int x = 42;
-    ft_printf("Teste %p\n", (void *)&x);
-	printf("Teste %p\n", (void *)&x);
-
-    // Testando %d
-    ft_printf("Teste %d\n", -12345);
-	printf("Teste %d\n", -12345);
-
-    // Testando %i
-    ft_printf("Teste %i\n", 12345);
-	printf("Teste %i\n", 12345);
-
-    // Testando %u
-    ft_printf("Teste %u\n", INT_MAX);
-	printf("Teste %u\n", INT_MAX);
-
-    // Testando %x
-    ft_printf("Teste %x\n", 255);
-	printf("Teste %x\n", 255);
-    // Testando %X
-    ft_printf("Teste %X\n", 255);
-	printf("Teste %X\n", 255);
-
-    // Testando %%
-    ft_printf("Teste %%\n");
-	printf("Teste %%\n");
-
-    return 0;
+	fd = 1;
+	if (n < 0)
+		n = -n;
+	if (n > 9)
+		ft_putunbr(n / 10);
+	ft_putchar_fd(n % 10 + '0', fd);
 }
+
+// #include <stdio.h>
+// #include <limits.h>
+
+// int main(void)
+// {
+//     // Testando %c
+//     ft_printf("Teste %c\n", 'A');
+// 	printf("Teste %c\n", 'A');
+
+//     // Testando %s
+//     ft_printf("Teste %s\n", "Hello, World!");
+// 	printf("Teste %s\n", "Hello, World!");
+
+//     // Testando %p
+//     int x = 42;
+//     ft_printf("Teste %p\n", (void *)&x);
+// 	printf("Teste %p\n", (void *)&x);
+
+//     // Testando %d
+//     ft_printf("Teste %d\n", -12345);
+// 	printf("Teste %d\n", -12345);
+
+//     // Testando %i
+//     ft_printf("Teste %i\n", 12345);
+// 	printf("Teste %i\n", 12345);
+
+//     // Testando %u
+//     ft_printf("Teste %u\n", INT_MAX);
+// 	printf("Teste %u\n", INT_MAX);
+
+//     // Testando %x
+//     ft_printf("Teste %x\n", 255);
+// 	printf("Teste %x\n", 255);
+//     // Testando %X
+//     ft_printf("Teste %X\n", 255);
+// 	printf("Teste %X\n", 255);
+
+//     // Testando %%
+//     ft_printf("Teste %%\n");
+// 	printf("Teste %%\n");
+
+//     return 0;
+// }

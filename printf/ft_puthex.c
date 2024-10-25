@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "ft_printf.h"
 
 void	ft_putnbr_base(int nbr, char *base);
 void	ft_putchar(char c);
 void	ft_putnbr_base_recursive(long nbr, char *base, int base_len);
-int		ft_strlen(char *str);
 
 int	is_valid(char *base)
 {
@@ -75,14 +74,4 @@ void	ft_putnbr_base(int nbr, char *string)
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
 }
