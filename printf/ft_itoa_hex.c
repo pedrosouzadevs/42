@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa_hex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 14:03:18 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/28 18:17:49 by pedro-hm         ###   ########.fr       */
+/*   Created: 2024/10/28 14:32:57 by pedro-hm          #+#    #+#             */
+/*   Updated: 2024/10/28 16:11:52 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
+#include "includes/ft_printf.h"
 
-int		ft_count_nbr(int n);
-char	*ft_convert_nbr_to_char(char *result, int i, int wres);
+static int		ft_count_nbr(int n);
+static char	*ft_convert_nbr_to_char(char *result, int i, int wres, char *base);
 
-char	*ft_itoa(int n)
+char	*ft_itoa_hex(int n, char *base)
 {
 	char	*result;
 	int		i;
@@ -39,11 +37,11 @@ char	*ft_itoa(int n)
 		return (ft_strdup("0"));
 	}
 	else
-		ft_convert_nbr_to_char(result, i, wres);
+		ft_convert_nbr_to_char(result, i, wres, base);
 	return (result);
 }
 
-int	ft_count_nbr(int n)
+static int	ft_count_nbr(int n)
 {
 	int	count;
 	int	wres;
@@ -68,20 +66,15 @@ int	ft_count_nbr(int n)
 	return (count);
 }
 
-char	*ft_convert_nbr_to_char(char *result, int i, int wres)
+static char	*ft_convert_nbr_to_char(char *result, int i, int wres, char *base)
 {
 	int		j;
 
 	j = i;
-	if (wres < 0)
-	{
-		result[0] = '-';
-		wres = wres * -1;
-	}
 	while (wres > 0)
 	{
-		result[i - 1] = (wres % 10) + '0';
-		wres = wres / 10;
+		result[i - 1] = base[wres % 16];
+		wres = wres / 16;
 		i--;
 	}
 	result[j] = '\0';

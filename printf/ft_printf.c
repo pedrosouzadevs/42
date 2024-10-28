@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:14:05 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/25 18:31:23 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:51:16 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,104 +16,164 @@
 
 int ft_printf(const char *string, ...)
 {
+	va_list	args;
 	size_t	count;
-	va_list args;
-	va_start(args, string);
+	char	*str;
+	t_node	*node;
 
+	str = malloc(sizeof(char) * 100);
+	node = malloc(sizeof(t_node));
+	if (!str || !node)
+		return (-1);
 	count = 0;
+	va_start(args, string);
 	while (*string)
 	{
 		if (*string == '%')
 		{
-			ft_searching_porcentage((char *)string, args, &count);
+			string++;
+			ft_transform(node, args, (char *)string);
+			ft_strjoin(str, ft_join_strings((char *)string, node));
+		}
+		else
+		{
+			str = (char *)string;
+			str++;
 			string++;
 		}
- 		else
-			ft_putchar_fd(*string, 1);
 		string++;
-		count++;
 	}
 	va_end(args);
+	ft_putstr_fd(str, 1);
+	count = ft_strlen(str);
 	return (count);
 }
 
-void	ft_putptr(void *p, size_t *count, char *base)
+void	ft_transform(t_node *node, va_list args, char *string)
 {
-	unsigned long long	i;
-	size_t				counting;
-	char				numbers[12];
-	int					j;
+	char	character;
 
-	j = 0;
-	i = (unsigned long long)p;
-	ft_putstr_fd("0x", 1);
-	counting = *count;
-	while (j < 12)
-	{
-		numbers[j] = (i % 16) + '0';
-		i = i / 16;
-		j++;
-	}
-	while (j > 0)
-	{
-		ft_putchar(base[(int)numbers[j]]);
-		j--;
-	}
-	counting += 14;
-}
-void	ft_searching_porcentage(char *string, va_list args, size_t *count)
-{
-	char	*base;
-
-	base = "0123456789abcdef";
-	string++;
 	if (*string == 'c')
 	{
-		ft_putchar_fd(va_arg(args, int), 1);
-		count++;
+		character = (char)va_arg(args, int);
+		node->c = &character;
 	}
-	else if (*string == 's')
-		ft_count_str(va_arg(args, char *), count);
-	else if (*string == 'p')
-		ft_putptr(va_arg(args, void *), count, base);
-	else if (*string == 'd' || *string == 'i')
-		ft_count_putnbr(va_arg(args, int), count);
-	else if (*string == 'u')
-		ft_putunbr(va_arg(args, int), count);
-	else if (*string == 'x')
-		ft_count_putnbr_base(va_arg(args, int), count, base);
-	else if (*string == 'X')
-		ft_count_putnbr_base(va_arg(args, int), count, "0123456789ABCDEF");
-	else
-		ft_putchar_fd(*string, 1);
+	if (*string == 's')
+		node->s = va_arg(args, char *);
+	if (*string == 'p')
+		ft_trans_ptr(va_arg(args, void *), node, "0123456789abcdef");
+	if (*string == 'd')
+		ft_trans_number(va_arg(args, int), node, string);
+	if (*string == 'i')
+		ft_trans_number(va_arg(args, int), node, string);
+	if (*string == 'u')
+		ft_trans_unsigned_number(va_arg(args, unsigned int), node);
+	if (*string == 'x')
+		ft_trans_hex(va_arg(args, int), node, "0123456789abcdef");
+	if (*string == 'X')
+		ft_trans_hex(va_arg(args, int), node, "0123456789ABCDEF");
 }
 
-void	ft_putunbr(int n, size_t *count)
+void	ft_trans_ptr(void *p, t_node *node, char *base)
 {
-	int	nbr;
+	char			*ptr;
+	unsigned long	n;
 
-	nbr = n;
-	while (nbr > 9)
-	{
-		nbr = nbr/10;
-		count++;
-	}
-	if (n < 0)
-	{
-		n = -n;
-		count++;
-	}
-	if (n > 9)
-		ft_putunbr(n / 10, count);
-	ft_putchar_fd((n % 10 + '0'), 1);
+	ptr = malloc(sizeof(char) * 14);
+	if (!ptr)
+		return ;
+	ptr[0] = '0';
+	ptr[1] = 'x';
+	n = (unsigned long)p;
+	ptr = ft_itoa_hex(n, base);
+	node->p = ptr;
 }
 
+void	ft_trans_hex(unsigned int number, t_node *node, char *base)
+{
+	char			*ptr;
+	unsigned int	n;
+
+	n = number;
+	ptr = ft_itoa_hex(n, base);
+	if (ft_strncmp(base, "0123456789abcdef", 16) == 0)
+		node->x = ptr;
+	else
+		node->X = ptr;
+}
+
+void	ft_trans_number(int number, t_node *node, char *string)
+{
+	char			*ptr;
+	unsigned int	n;
+
+	n = number;
+	ptr = ft_itoa(n);
+	if (*string == 'd')
+		node->d = ptr;
+	else
+		node->i = ptr;
+}
+
+void	ft_trans_unsigned_number(unsigned int number, t_node *node)
+{
+	char			*ptr;
+	unsigned int	n;
+
+	n = number;
+	ptr = ft_itoa(n);
+	node->u = ptr;
+}
+
+char	*ft_join_strings(char * string, t_node *node)
+{
+	char	*ptr;
+
+	ptr = NULL;
+
+	if (*string == 'c')
+		ft_strlcpy(ptr, node->c, 1);
+	if (*string == 's')
+		ft_strlcpy(ptr, node->s, ft_strlen(node->s));
+	if (*string == 'p')
+	{
+		ft_strlcpy(ptr, node->p, ft_strlen(node->p));
+		printf("%s", ptr);
+	}
+	if (*string == 'd')
+	{
+		ft_strlcpy(ptr, node->d, ft_strlen(node->d));
+		printf("%s", ptr);
+	}
+	if (*string == 'i')
+	{
+		ft_strlcpy(ptr, node->i, ft_strlen(node->i));
+		printf("%s", ptr);
+	}
+	if (*string == 'u')
+	{
+		ft_strlcpy(ptr, node->u, ft_strlen(node->u));
+		printf("%s", ptr);
+	}
+	if (*string == 'x')
+	{
+		ft_strlcpy(ptr, node->x, ft_strlen(node->x));
+		printf("%s", ptr);
+	}
+	if (*string == 'X')
+	{
+		ft_strlcpy(ptr, node->X, ft_strlen(node->X));
+		printf("%s", ptr);
+	}
+	return (ptr);
+}
 
 // int main(void)
 // {
 //     // Testando %c
-//     ft_printf("Teste %c\n", 'A');
-// 	printf("Teste %c\n", 'A');
+// 	printf("...............................................................\n");
+//     ft_printf("Meu Teste %c\n", 'A');
+// 	printf("Machine Teste %c\n", 'A');
 
 //     // Testando %s
 //     ft_printf("Teste %s\n", "Hello, World!");
@@ -126,17 +186,7 @@ void	ft_putunbr(int n, size_t *count)
 
 //     //Testando %d
 //     ft_printf("Teste %d\n", 0);
-// 	ft_printf("Teste %d\n", -1);
-// 	ft_printf("Teste %d\n", 1);
-// 	ft_printf("Teste %d\n", 9);
-// 	ft_printf("Teste %d\n", 10);
-// 	ft_printf("Teste %d\n", 11);
-// 	ft_printf("Teste %d\n", 15);
-// 	ft_printf("Teste %d\n", 16);
-// 	ft_printf("Teste %d\n", 17);
-// 	ft_printf("Teste %d\n", 99);
-// 	ft_printf("Teste %d\n", 110);
-// 	ft_printf("Teste %d\n", 101);
+// 	//
 
 //     // Testando %i
 //     ft_printf("Teste %i\n", 12345);
@@ -158,6 +208,8 @@ void	ft_putunbr(int n, size_t *count)
 // 	printf("Teste %%\n");
 
 // 	printf("Teste %d\n", ft_printf("Teste %c\n", 'A'));
-// 	printf("Tste %d\n", printf("Teste %c\n", 'A'));
+// 	printf("Teste %d\n", printf("Teste %c\n", 'A'));
+// 	printf("...............................................................");
+
 //     return 0;
 // }

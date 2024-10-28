@@ -6,13 +6,11 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:03:18 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/28 18:17:49 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:38:07 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
+#include "includes/ft_printf.h"
 
 int		ft_count_nbr(int n);
 char	*ft_convert_nbr_to_char(char *result, int i, int wres);

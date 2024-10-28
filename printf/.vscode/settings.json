@@ -59,6 +59,7 @@
   "files.associations": {
     "limits.h": "c",
     "stdio.h": "c",
-    "ft_printf.h": "c"
+    "ft_printf.h": "c",
+    "stddef.h": "c"
   }
 }

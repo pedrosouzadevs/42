@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:12:09 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/25 18:22:07 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:48:14 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,39 @@
 #define FT_PRINTF_H
 
 #include <stdarg.h>
-#include "../libs/libft/libft.h"
 #include <unistd.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 typedef struct t_node
 {
-	char			c;
-	int				i;
-	int				d;
+	char			*c;
+	char			*i;
+	char			*d;
 	char			*s;
-	void			*p;
-	unsigned int	u;
-	int				x;
-	int				X;
-} t_node;
+	char			*p;
+	char			*u;
+	char			*x;
+	char			*X;
+}	t_node;
 
+int				ft_printf(const char *string, ...);
+void			ft_putchar_fd(char c, int fd);
+void			ft_putstr_fd(char *s, int fd);
+size_t			ft_strlen(const char *s);
+void			ft_trans_ptr(void *p, t_node *node, char *base);
+void			ft_transform(t_node *node, va_list args, char *string);
+void			ft_trans_number(int number, t_node *node, char *string);
+void			ft_trans_hex(unsigned int number, t_node *node, char *base);
+void			ft_trans_unsigned_number(unsigned int number, t_node *node);
+char			*ft_join_strings(char * string, t_node *node);
+char			*ft_itoa_hex(int n, char *base);
+char			*ft_itoa(int n);
+size_t			ft_strlcpy(char *dest, const char *src, size_t size);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+void			ft_putchar(char c);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strdup(const char *s1);
 
-int		ft_printf(const char *string, ...);
-void	ft_putnbr_base(int nbr, char *string);
-void	ft_putptr(void *p, size_t *count, char *base);
-void	ft_putunbr(int n, size_t *count);
-void	ft_searching_porcentage(char *string, va_list args, size_t *count);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
-size_t	ft_strlen(const char *s);
-void	ft_putchar(char c);
-void	ft_putnbr_base_recursive(long nbr, char *base, int base_len);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_count_putnbr(int n, size_t *count);
-void	ft_count_putnbr_base(int n, size_t *count, char *base);
-void	ft_count_letters(char *string, va_list args, size_t *count);
-void	ft_count_putunbr(int n, size_t *count);
-void	ft_count_putptr(void *p, size_t *count);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_count_str(char *string, size_t *count);
-void	ft_final_count(char *string, va_list args, size_t *count);
-void	ft_putnbr_base_fd(int n, int fd, char *base);
 
 #endif // FT_PRINTF_H
