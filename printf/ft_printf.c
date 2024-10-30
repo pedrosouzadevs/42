@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 14:14:05 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/29 18:44:52 by pedro-hm         ###   ########.fr       */
+/*   Created: 2024/10/30 13:36:01 by pedro-hm          #+#    #+#             */
+/*   Updated: 2024/10/30 17:46:12 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,11 @@
 #include <stdio.h>
 #include <limits.h>
 
-
 int ft_printf(const char *string, ...)
 {
 	va_list	args;
-	int	count;
-	char	*str;
-	char	*temp;
-	char	*result;
-	int		i;
+	int		count;
 
-	str = malloc(sizeof(char) * 1000);
-	if (!str)
-		return (-1);
 	count = 0;
 	va_start(args, string);
 	while (*string)
@@ -34,196 +26,331 @@ int ft_printf(const char *string, ...)
 		if (*string == '%')
 		{
 			string++;
-			temp = ft_transform(args, (char *)string);
-			ft_strjoin(str, temp);
-			free(temp);
+			ft_transform(args, (char *)string, &count);
 		}
 		else
-			*str++ = *string++;
+			ft_putchar_fd(*string, 1, &count);
 		string++;
 	}
 	va_end(args);
-	i = 0;
-	while (str[i])
-	{
-		i++;
-		count++;
-	}
-	result = malloc(sizeof(char) * (count + 1));
-	if (!result)
-		return (-1);
-	result[count] = '\0';
-	ft_putstr_fd(result, 1);
 	return (count);
 }
 
-char	*ft_transform(va_list args, char *string)
+void	ft_transform(va_list args, char *string, int *count)
 {
-	char	*temp;
-
 	if (*string == 'c')
-	{
-		temp = malloc(2);
-		if (!temp)
-			return (NULL);
-		temp[0] = (char)va_arg(args, int);
-		temp[1] = '\0';
-	}
+		ft_putchar_fd(va_arg(args, int), 1, count);
 	else if (*string == 's')
-		temp = ft_strdup(va_arg(args, char *));
+		ft_putstr_fd(va_arg(args, char *), 1, count);
 	else if (*string == 'p')
-		temp = ft_trans_ptr(args, "0123456789abcdef");
-	else if (*string == 'd' || *string == 'i')
-		temp = ft_trans_number(args, string);
+		ft_trans_ptr(va_arg(args, void *), "0123456789abcdef", count);
+	else if (*string == 'd')
+		ft_trans_number(va_arg(args, int), count);
+	else if (*string == 'i')
+		ft_trans_number(va_arg(args, int), count);
 	else if (*string == 'u')
-		temp = ft_trans_unsigned_number(args);
+		ft_trans_unsigned_number(va_arg(args, unsigned int), count);
 	else if (*string == 'x')
-		temp = ft_trans_hex(args, "0123456789abcdef");
+		ft_trans_hex(va_arg(args, int), "0123456789abcdef", count);
 	else if (*string == 'X')
-		temp = ft_trans_hex(args, "0123456789ABCDEF");
-	else
-		temp = ft_strdup("");
-	return (temp);
+		ft_trans_hex(va_arg(args, int), "0123456789ABCDEF", count);
+	else if (*string == '%')
+		ft_putchar_fd('%', 1, count);
 }
-char	*ft_trans_ptr(va_list args, char *base)
+
+void	ft_trans_ptr(void *p, char *base, int *count)
 {
-	char			*ptr;
 	unsigned long	n;
-	char			*tmp;
+	char			hex_str[14];
+	int				i;
 
-	n  = (unsigned long)va_arg(args, void *);
-	ptr = malloc(sizeof(char) * 14);
-	if (!ptr)
-		return (NULL);
-	ptr[0] = '0';
-	ptr[1] = 'x';
-	tmp = ft_itoa_hex(n, base);
-	ft_strlcpy(ptr + 2, tmp, strlen(tmp));
-	return (ptr);
-}
-
-char	*ft_trans_hex(va_list args, char *base)
-{
-	char			*ptr;
-	unsigned int	n;
-
-	n = va_arg(args, int);
-	ptr = ft_itoa_hex(n, base);
-	if (ft_strncmp(base, "0123456789abcdef", 16) == 0)
-		return (ptr);
+	if (p == NULL)
+	{
+		count += 5;
+		ft_putstr_fd("(nil)", 1, count);
+	}
 	else
-		return (ptr);
-
+	{
+		i = 13;
+		n = (unsigned long)p;
+		while (i >= 2)
+		{
+			hex_str[i] = base[n % 16];
+			i--;
+			n /= 16;
+			if (n == 0)
+				break ;
+		}
+		hex_str[0] = '0';
+		hex_str[1] = 'x';
+		i = 0;
+		while (i < 14)
+			write(1, &hex_str[i++], 1);
+		*count += 14;
+	}
 }
 
-char	*ft_trans_number(va_list args, char *string)
+void	ft_trans_hex(int number, char *base, int *count)
 {
 	char			*ptr;
-	unsigned int	n;
+	int				i;
+	int				size_number;
 
-	n = (va_arg(args, int));
-	ptr = ft_itoa(n);
-	if (*string == 'd')
-		return (ptr);
-	else
-		return (ptr);
+	size_number = ft_count_nbr(number);
+	i = 0;
+	ptr = malloc(sizeof(char) * size_number + 1);
+	if (ptr == NULL)
+		return ;
+	while (i < size_number)
+	{
+		ptr[i++] = base[number % 16];
+		number = number / 16;
+	}
+	ptr[size_number] = '\0';
+	i--;
+    while (i >= 0)
+		ft_putchar_fd(ptr[i--], 1, count);
+	free(ptr);
 }
 
-char	*ft_trans_unsigned_number(va_list args)
+void	ft_trans_number(int number, int *count)
 {
 	char			*ptr;
-	unsigned int	n;
+	int				i;
+	int				size_number;
 
-	n = va_arg(args, unsigned int);
-	ptr = ft_itoa(n);
-	return (ptr);
-
+	i = 0;
+	size_number = ft_count_nbr(number);
+	number = ft_number_negative(number, count);
+	if (number == 0)
+		ft_putchar_fd('0', 1, count);
+	else if (number > 0)
+	{
+		ptr = malloc(sizeof(char) * (size_number + 1));
+		if (ptr == NULL)
+			return ;
+		while (number > 0)
+		{
+			ptr[i++] = (number % 10) + '0';
+			number = number / 10;
+		}
+		i--;
+		ptr[i + 1] = '\0';
+		while (i >= 0)
+			ft_putchar_fd(ptr[i--], 1, count);
+		free(ptr);
+	}
 }
 
+int	ft_number_negative(int number, int *count)
+{
+	if (number < 0)
+	{
+		ft_putchar_fd('-', 1, count);
+		number = -number;
+	}
+	return (number);
+}
 
-// void	ft_join_strings(char * string, char *temp)
+void	ft_trans_unsigned_number(unsigned int number, int *count)
+{
+	char			*ptr;
+	int				i;
+	int				size_number;
+
+	i = 0;
+	size_number = ft_count_nbr(number);
+	number = ft_number_negative(number, count);
+	if (number == 0)
+		ft_putchar_fd('0', 1, count);
+	else if (number > 0)
+	{
+		ptr = malloc(sizeof(char) * (size_number + 1));
+		if (ptr == NULL)
+			return ;
+		while (number > 0)
+		{
+			ptr[i++] = (number % 10) + '0';
+			number = number / 10;
+		}
+		i--;
+		ptr[i + 1] = '\0';
+		while (i >= 0)
+			ft_putchar_fd(ptr[i--], 1, count);
+		free(ptr);
+	}
+}
+
+// int main(void)
 // {
-// 	char	*ptr;
+//     // Testando %c
+// 	int *x;
 
-// 	ptr = temp;
-// 	if (*string == 'c')
-// 		ft_strlcpy(ptr, node->c, 1);
-// 	if (*string == 's')
-// 		ft_strlcpy(ptr, node->s, ft_strlen(node->s));
-// 	if (*string == 'p')
-// 		ft_strlcpy(ptr, node->p, ft_strlen(node->p));
-// 	if (*string == 'd')
-// 		ft_strlcpy(ptr, node->d, ft_strlen(node->d));
-// 	if (*string == 'i')
-// 		ft_strlcpy(ptr, node->i, ft_strlen(node->i));
-// 	if (*string == 'u')
-// 		ft_strlcpy(ptr, node->u, ft_strlen(node->u));
-// 	if (*string == 'x')
-// 		ft_strlcpy(ptr, node->x, ft_strlen(node->x));
-// 	if (*string == 'X')
-// 		ft_strlcpy(ptr, node->X, ft_strlen(node->X));
+// 	x = 42;
+
+// 	printf("Len: %d\n",ft_printf("Numero: %p", x));
+// 	printf("Len: %d\n",printf("Numero: %p", x));
+//     // printf("...............................................................\n");
+//     // printf("Len: %d", ft_printf("Char: %c, String: %s, Ponteiro %p, Numero: %d, Numero: %i, Unumero: %u, Hexx: %x, HexX %X, Percentage: %%\n",
+//     //           'A', "Hello, World!", (void *)&x, -10, 12345, INT_MAX, 42, 42, 'A'));
+//     // printf("...............................................................\n");
+
+//     // printf("Len %d" , printf("Char: %c, String: %s, Ponteiro %p, Numero: %d, Numero: %i, Unumero: %u, Hexx: %x, HexX %X, Percentage: %%\n",
+//     //           'A', "Hello, World!", (void *)&x, -10, 12345, INT_MAX, 42, 42, 'A'));
+//     // printf("...............................................................\n");
+//     return 0;
 // }
 
-// int	ft_count_words(t_node *node, va_list args, char *string)
-// {
-// 	int	count;
-
-// 	count = 0;
-// 	while (*string)
-// 	{
-// 		while (*string == '%')
-// 		{
-// 			string++;
-// 			ft_transform(node, args, (char *)string);
-// 			count += ft_strlen(ft_join_strings((char *)string, node));
-// 			printf("count: %d\n", count);
-// 		}
-// 	}
-// 	return (count);
-// }
-
+void printcmp(int a, int b)
+{
+    if (a == b)
+    {
+        ft_printf("OK\n");
+    }
+    else
+        ft_printf("KO --!\n");
+}
 int main(void)
 {
-    // Testando %c
-	printf("...............................................................\n");
-	printf("Teste %c\n", 'A');
-    ft_printf("Teste %c\n", 'A');
+    char    *str = "12ozmouse";
+    char    *nulo = NULL;
+    char    **ptr;
+    int     myfunc;
+    int     original;
+    ptr = &str;
 
-    // Testando %s
-    ft_printf("Teste %s\n", "Hello, World!");
-	printf("Teste %s\n", "Hello, World!");
+    ft_printf("---------my func-----------\n");
+    myfunc = ft_printf("c flag: %c|%c|%c|%c|%c\n", 'r', str[2], 97 - 32, *str, 48);
 
-    // Testando %p
-    int x = 22;
-    ft_printf("Teste %p\n", (void *)&x);
-	printf("Teste %p\n", (void *)&x);
+    ft_printf("\n---------original-----------\n");
+	original = printf("c flag: %c|%c|%c|%c|%c\n", 'r', str[2], 97 - 32, *str, 48);
 
-    //Testando %d
-    ft_printf("Teste %d\n", 0);
-	//
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
 
-    // Testando %i
-    ft_printf("Teste %i\n", 12345);
-	printf("Teste %i\n", 12345);
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf("s flag: %s|%s|%s|%s|%s|%s\n", "12ozmouse", str, str + 2, "", "-", nulo);
 
-    // Testando %u
-    ft_printf("Teste %u\n", INT_MAX);
-	printf("Teste %u\n", INT_MAX);
+    ft_printf("\n---------original-----------\n");
+    original = printf("s flag: %s|%s|%s|%s|%s|%s\n", "12ozmouse", str, str + 2, "", "-", nulo);
 
-    // Testando %x
-    ft_printf("Teste %x\n", 22);
-	printf("Teste %x\n", 22);
-    // Testando %X
-    ft_printf("Teste %X\n", 22);
-	printf("Teste %X\n", 22);
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
 
-    // Testando %%
-    ft_printf("Teste %%\n");
-	printf("Teste %%\n");
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf("p flag: %p|%p|%p|%p|%p|%p\n", str, &str, ptr, &ptr, nulo, &nulo);
 
-	printf("Teste %d\n", ft_printf("Teste %c\n", 'A'));
-	printf("Teste %d\n", printf("Teste %c\n", 'A'));
-	printf("...............................................................");
+    ft_printf("\n---------original-----------\n");
+    original = printf("p flag: %p|%p|%p|%p|%p|%p\n", str, &str, ptr, &ptr, nulo, &nulo);
 
-    return 0;
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf("d flag: %d|%d|%d|%d|%d\n", 7, -7, 0, 2147483647, -2147483648);
+
+    ft_printf("\n---------original-----------\n");
+    original = printf("d flag: %d|%d|%d|%d|%d\n", 7, -7, 0, 2147483647, -2147483647 - 1);
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf("i flag: %i|%i|%i|%i|%i\n", 7, -7, 0, 2147483647, -2147483648);
+
+    ft_printf("\n---------original-----------\n");
+    original = printf("i flag: %i|%i|%i|%i|%i\n", 7, -7, 0, 2147483647, -2147483647 - 1);
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf("u flag: %u|%u|%u|%u|%u\n", 7, -7, 0, 2147483647, -2147483648);
+
+    ft_printf("\n---------original-----------\n");
+    original = printf("u flag: %u|%u|%u|%u|%u\n", 7, -7, 0,
+     2147483647, -2147483647 - 1);
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf("x flag: %x|%x|%x|%x|%x\n", 7, -7, 0, 2147483647, -2147483648);
+
+    ft_printf("\n---------original-----------\n");
+    original = printf("x flag: %x|%x|%x|%x|%x\n", 7, -7, 0, 2147483647, -2147483647 - 1);
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf("X flag: %X|%X|%X|%X|%X\n", 7, -7, 0, 2147483647, -2147483648);
+
+    ft_printf("\n---------original-----------\n");
+    original = printf("X flag: %X|%X|%X|%X|%X\n", 7, -7, 0, 2147483647, -2147483647 - 1);
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf("%% flag: %% | %%|%% \n");
+
+    ft_printf("\n---------original-----------\n");
+    original = printf("%% flag: %% | %%|%% \n");
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf(", I've printed %d characters!\n",
+    ft_printf("d flag: %d|%d|%d|%d", 0, -37, 37, 187398217));
+
+    ft_printf("\n---------original-----------\n");
+    original = printf(", I've printed %d characters!\n",
+     printf("d flag: %d|%d|%d|%d", 0, -37, 37, 187398217));
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf(", I've printed %d characters!\n",
+     ft_printf("d flag: %d|%d|%d|%d", 0, -22222, 'n', 0));
+
+    ft_printf("\n---------original-----------\n");
+    original = printf(", I've printed %d characters!\n",
+     printf("d flag: %d|%d|%d|%d", 0, -22222, 'n', 0));
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf(", I've printed %d characters!\n",
+     ft_printf("INT MIN: %d", -2147483647 - 1));
+
+    ft_printf("\n---------original-----------\n");
+    original = printf(", I've printed %d characters!\n",
+     printf("INT MIN: %d", -2147483647 - 1));
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf("MIXED:%c|%s|%p|%d|%i|%u|%x|%X|%%\n", str[6], nulo, str, -912387, 00000, -99, 743, 743);
+
+    ft_printf("\n---------original-----------\n");
+    original = printf("MIXED:%c|%s|%p|%d|%i|%u|%x|%X|%%\n", str[6], nulo, str, -912387, 00000, -99, 743, 743);
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
+
+    ft_printf("\n---------my func-----------\n");
+    myfunc = ft_printf(NULL);
+
+    ft_printf("\n---------original-----------\n");
+    original = printf(NULL);
+
+    ft_printf("\n---------resultado-----------\n");
+    printcmp(myfunc, original);
+
 }

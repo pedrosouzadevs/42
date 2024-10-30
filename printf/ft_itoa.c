@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 14:03:18 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/28 18:38:07 by pedro-hm         ###   ########.fr       */
+/*   Created: 2024/10/30 13:36:08 by pedro-hm          #+#    #+#             */
+/*   Updated: 2024/10/30 13:37:29 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
 
-int		ft_count_nbr(int n);
 char	*ft_convert_nbr_to_char(char *result, int i, int wres);
 
 char	*ft_itoa(int n)
@@ -26,44 +25,9 @@ char	*ft_itoa(int n)
 	result = (char *)malloc(sizeof(char) * (i + 1));
 	if (result == NULL)
 		return (NULL);
-	if (n == -2147483648)
-	{
-		free(result);
-		return (ft_strdup("-2147483648"));
-	}
-	else if (n == 0)
-	{
-		free(result);
-		return (ft_strdup("0"));
-	}
 	else
 		ft_convert_nbr_to_char(result, i, wres);
 	return (result);
-}
-
-int	ft_count_nbr(int n)
-{
-	int	count;
-	int	wres;
-
-	count = 0;
-	wres = n;
-	if (n == 0)
-		count = 1;
-	else
-	{
-		if (wres < 0)
-		{
-			wres = wres * -1;
-			count++;
-		}
-		while (wres != 0)
-		{
-			wres = wres / 10;
-			count++;
-		}
-	}
-	return (count);
 }
 
 char	*ft_convert_nbr_to_char(char *result, int i, int wres)
