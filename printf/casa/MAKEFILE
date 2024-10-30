@@ -1,5 +1,5 @@
 
-SRC = ft_printf.c ft_itoa_hex.c ft_printf_utils.c  ft_itoa.c ft_strncmp.c
+SRC = ft_printf.c ft_itoa_hex.c ft_printf_utils.c  ft_itoa.c
 
 
 HEADER = includes/ft_printf.h
