@@ -6,11 +6,11 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:58:19 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/29 18:42:27 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/10/29 18:44:47 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "includes/ft_printf.h"
 
 size_t	ft_strlen(const char *s)
 {

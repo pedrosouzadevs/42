@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:27:23 by pdro              #+#    #+#             */
-/*   Updated: 2024/10/28 18:40:46 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/10/29 18:37:29 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,4 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	while (*s)
 		write(fd, s++, 1);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
 }
