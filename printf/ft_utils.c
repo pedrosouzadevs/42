@@ -6,13 +6,13 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:35:57 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/30 15:39:15 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:51:53 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "ft_printf.h"
 
-void	ft_putchar_fd(char c, int fd , int *count)
+void	ft_putchar_fd(char c, int fd, int *count)
 {
 	write(fd, &c, 1);
 	*count += 1;
@@ -20,12 +20,6 @@ void	ft_putchar_fd(char c, int fd , int *count)
 
 void	ft_putstr_fd(char *s, int fd, int *count)
 {
-	if (!s)
-	{
-		count += 6;
-		ft_putstr_fd("(null)", fd, count);
-		return ;
-	}
 	while (*s)
 		ft_putchar_fd(*s++, fd, count);
 }
@@ -53,6 +47,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
+
 int	ft_count_nbr(int n)
 {
 	int	count;
@@ -69,6 +64,28 @@ int	ft_count_nbr(int n)
 			wres = wres * -1;
 			count++;
 		}
+		while (wres != 0)
+		{
+			wres = wres / 10;
+			count++;
+		}
+	}
+	return (count);
+}
+
+int	ft_count_unbr(unsigned int n)
+{
+	int				count;
+	unsigned int	wres;
+
+	count = 0;
+	wres = n;
+	if (n == 0)
+		count = 1;
+	else
+	{
+		if (wres < 0)
+			wres = wres * -1;
 		while (wres != 0)
 		{
 			wres = wres / 10;

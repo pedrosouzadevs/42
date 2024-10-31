@@ -6,13 +6,13 @@
 #    By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/23 14:09:56 by pedro-hm          #+#    #+#              #
-#    Updated: 2024/10/30 13:35:17 by pedro-hm         ###   ########.fr        #
+#    Updated: 2024/10/31 18:53:53 by pedro-hm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = ft_printf.c ft_itoa_hex.c ft_utils.c  ft_itoa.c
+SRC = ft_printf.c ft_itoa_hex.c ft_utils.c ft_itoa.c ft_itoa_unsigned.c ft_itoa_ptr.c ft_trans.c
 
-HEADER = includes/ft_printf.h
+HEADER = ft_printf.h
 
 OBJ = ${SRC:.c=.o}
 

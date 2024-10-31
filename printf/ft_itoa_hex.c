@@ -6,35 +6,48 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:36:14 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/30 13:36:16 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:51:43 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "ft_printf.h"
 
-static char	*ft_convert_nbr_to_char(char *result, int i, int wres, char *base);
-
-char	*ft_itoa_hex(unsigned long n, char *base)
+void	ft_itoa_hex(unsigned int n, char *base, int *count)
 {
-	char	*result;
-	int		i;
-	int		wres;
+	char				*result;
+	int					i;
+	unsigned long		wres;
 
 	wres = n;
-	i = ft_count_nbr(n);
+	i = ft_count_hexnbr(n);
 	result = (char *)malloc(sizeof(char) * (i + 1));
 	if (result == NULL)
-		return (NULL);
+		return ;
+	if (n == 0)
+	{
+		free(result);
+		ft_putstr_fd("0", 1, count);
+	}
 	else
-		ft_convert_nbr_to_char(result, i, wres, base);
-	return (result);
+	{
+		ft_convert_nbr_to_char_hex(result, i, wres, base);
+		ft_putstr_fd(result, 1, count);
+		free(result);
+	}
 }
 
-static char	*ft_convert_nbr_to_char(char *result, int i, int wres, char *base)
+char	*ft_convert_nbr_to_char_hex(char *result, int i,
+			unsigned int wres, char *base)
 {
 	int		j;
 
 	j = i;
+	if (wres == 0)
+	{
+		result[0] = base[0];
+		result[1] = '\0';
+		return (result);
+	}
 	while (wres > 0)
 	{
 		result[i - 1] = base[wres % 16];
@@ -43,4 +56,24 @@ static char	*ft_convert_nbr_to_char(char *result, int i, int wres, char *base)
 	}
 	result[j] = '\0';
 	return (result);
+}
+
+int	ft_count_hexnbr(unsigned int n)
+{
+	int				count;
+	unsigned int	wres;
+
+	count = 0;
+	wres = n;
+	if (n == 0)
+		count = 1;
+	else
+	{
+		while (wres != 0)
+		{
+			wres = wres / 16;
+			count++;
+		}
+	}
+	return (count);
 }
