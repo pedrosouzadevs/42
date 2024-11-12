@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:37:40 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/11/12 15:22:19 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:38:01 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,7 @@ char	*ft_strchr(const char *str, int c);
 int	ft_count_char(int fd, char *buffer);
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size);
 unsigned int	ft_strlcpy(char *dest, const char *src, unsigned int size);
+int get_n_times(int fd);
+int get_substring_size(int fd);
+char **get_string_array(char *buffer, int fd,char **stack);
 #endif

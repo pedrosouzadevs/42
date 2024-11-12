@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:47:26 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/11/12 15:44:40 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:37:52 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,103 +16,200 @@
 #include <fcntl.h>
 #include <stdio.h>
 
+
 char *get_next_line(int fd)
 {
-	static char *buffer;
-	static int buffer_position;
-	static int bytes_in_buffer;
-	char *line;
-	char *temp_line;
-	int line_size = 0;
+	char 		*buffer;
+	char		**stack;
+	static int	stack_position;
 
-	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buffer, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 		return (NULL);
+	buffer = malloc(BUFFER_SIZE);
 	if (!buffer)
+		return (NULL);
+	stack = get_string_array(buffer, fd, stack);
+	if (!stack)
+		return (NULL);
+	// while (stack[stack_position])
+	// {
+	// 	stack_position++;
+	// 	printf("%s\n", stack[stack_position]);
+	// }
+	if (stack_position == 0)
 	{
-		buffer = malloc(BUFFER_SIZE);
-		if (!buffer)
-			return (NULL);
+		stack_position++;
+		return (stack[0]);
 	}
-	while (1)
-	{
-		if (buffer_position >= bytes_in_buffer)
-		{
-			buffer_position = 0;
-			bytes_in_buffer = read(fd, buffer, BUFFER_SIZE);
-			if (bytes_in_buffer <= 0)
-			{
-				free(buffer);
-				buffer = NULL;
-				if (line_size > 0)
-					return (line);
-				else
-					return (NULL);
-			}
-		}
-		temp_line = malloc(line_size + 2);
-		if (!temp_line)
-		{
-			free(line);
-			return (NULL);
-		}
-		if (line)
-		{
-			ft_strlcpy(temp_line, line, line_size + 1);
-			free(line);
-		}
-		line = temp_line;
-		line[line_size] = buffer[buffer_position];
-		line[line_size + 1] = '\0';
-		if (buffer[buffer_position] == '\n')
-		{
-			buffer_position++;
-			return (line);
-		}
-		buffer_position++;
-		line_size++;
-	}
+	return (stack[stack_position]);
 }
 
+char **get_string_array(char *buffer, int fd, char **stack)
+{
+	int stack_position_i;
+	int bytes_read;
+	char *line;
+	int	i;
 
+	stack = malloc(get_n_times(fd) * sizeof(char *));
+	stack_position_i = 0;
+	while ((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0)
+	{
+		line = malloc(get_substring_size(fd) * sizeof(char));
+		line[i] = buffer[i];
+		i++;
+		if (buffer[i] == '\n')
+		{
+			ft_memmove(stack[stack_position_i], line, i);
+			stack_position_i++;
+		}
+	}
+	return (stack);
+}
 
-// int main(void) {
-// 	int fd;
+int get_n_times(int fd)
+{
+	char	temp_buf;
+	int		size;
+	int		i;
+	int		bytes_read;
+
+	temp_buf = malloc(BUFFER_SIZE);
+	size = 0;
+	while ((bytes_read = read(fd, temp_buf, BUFFER_SIZE)) > 0)
+	{
+		size++;
+		if (temp_buf == '\n')
+			i++;
+	}
+	while (size > 0)
+	{
+		read(fd, temp_buf, -1);
+		size--;
+	}
+	return (i);
+}
+int get_substring_size(int fd)
+{
+	char	temp_buffer;
+	int		size;
+	int		i;
+	int		bytes_read;
+
+	temp_buffer = malloc(BUFFER_SIZE);
+	size = 0;
+	while ((bytes_read = read(fd, temp_buffer, BUFFER_SIZE)) > 0)
+	{
+		size++;
+		if (temp_buffer == '\n')
+			break ;
+	}
+	i = size;
+	while (size > 0)
+	{
+		read(fd, temp_buffer, -1);
+		size--;
+	}
+	return (i);
+}
+
+// char *get_next_line(int fd)
+// {
+// 	static char *buffer;
+// 	static int buffer_position;
+// 	static int bytes_in_buffer;
 // 	char *line;
+// 	char *temp_line;
+// 	int line_size = 0;
 
-// 	fd = open("teste.txt", O_RDONLY);
-// 	if (fd == -1) {
-// 		perror("Erro ao abrir arquivo");
-// 		return 1;
+// 	line = NULL;
+// 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buffer, 0) < 0)
+// 		return (NULL);
+// 	if (!buffer)
+// 	{
+// 		buffer = malloc(BUFFER_SIZE);
+// 		if (!buffer)
+// 			return (NULL);
 // 	}
-
-// 	line = get_next_line(fd);
-// 	printf("Linha 1: %s\n", line ? line : "(null)");
-// 	free(line);
-
-// 	line = get_next_line(fd);
-// 	printf("Linha 2: %s\n", line ? line : "(null)");
-// 	free(line);
-
-// 	line = get_next_line(fd);
-// 	printf("Linha 3: %s\n", line ? line : "(null)");
-// 	free(line);
-
-// 	line = get_next_line(fd);
-// 	printf("Linha 4: %s\n", line ? line : "(null)");
-// 	free(line);
-
-// 	line = get_next_line(fd);
-// 	printf("Linha 5: %s\n", line ? line : "(null)");
-// 	free(line);
-
-// 	line = get_next_line(fd);
-// 	printf("Linha 6: %s\n", line);
-// 	free(line);
-
-// 	close(fd);
-// 	return 0;
+// 	while (1)
+// 	{
+// 		if (buffer_position >= bytes_in_buffer)
+// 		{
+// 			buffer_position = 0;
+// 			bytes_in_buffer = read(fd, buffer, BUFFER_SIZE);
+// 			if (bytes_in_buffer <= 0)
+// 			{
+// 				free(buffer);
+// 				buffer = NULL;
+// 				if (line_size > 0)
+// 					return (line);
+// 				else
+// 					return (NULL);
+// 			}
+// 		}
+// 		temp_line = malloc(line_size + 2);
+// 		if (!temp_line)
+// 		{
+// 			free(line);
+// 			return (NULL);
+// 		}
+// 		if (line)
+// 		{
+// 			ft_strlcpy(temp_line, line, line_size + 1);
+// 			free(line);
+// 		}
+// 		line = temp_line;
+// 		line[line_size] = buffer[buffer_position];
+// 		line[line_size + 1] = '\0';
+// 		if (buffer[buffer_position] == '\n')
+// 		{
+// 			buffer_position++;
+// 			return (line);
+// 		}
+// 		buffer_position++;
+// 		line_size++;
+// 	}
 // }
+
+
+
+int main(void) {
+	int fd;
+	char *line;
+
+	fd = open("teste.txt", O_RDONLY);
+	if (fd == -1) {
+		perror("Erro ao abrir arquivo");
+		return 1;
+	}
+
+	line = get_next_line(fd);
+	printf("Linha 1: %s\n", line ? line : "(null)");
+	free(line);
+
+	line = get_next_line(fd);
+	printf("Linha 2: %s\n", line ? line : "(null)");
+	free(line);
+
+	line = get_next_line(fd);
+	printf("Linha 3: %s\n", line ? line : "(null)");
+	free(line);
+
+	line = get_next_line(fd);
+	printf("Linha 4: %s\n", line ? line : "(null)");
+	free(line);
+
+	line = get_next_line(fd);
+	printf("Linha 5: %s\n", line ? line : "(null)");
+	free(line);
+
+	line = get_next_line(fd);
+	printf("Linha 6: %s\n", line);
+	free(line);
+
+	close(fd);
+	return 0;
+}
 
 //     static char    *buffer;
 //     static int     bytes_read;
