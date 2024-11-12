@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:54:20 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/11/06 13:43:57 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:22:15 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,49 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		}
 	}
 	return (dest);
+}
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+{
+	unsigned int	dest_len;
+	unsigned int	src_len;
+	unsigned int	i;
+
+	dest_len = 0;
+	src_len = 0;
+	i = 0;
+	while (dest[dest_len] && dest_len < size)
+		dest_len++;
+	while (src[src_len])
+		src_len++;
+	if (size <= dest_len)
+		return (size + src_len);
+	while (src[i] && dest_len + i < size - 1)
+	{
+		dest[dest_len + i] = src[i];
+		i++;
+	}
+	dest[dest_len + i] = '\0';
+	return (dest_len + src_len);
+}
+unsigned int	ft_strlcpy(char *dest, const char *src, unsigned int size)
+{
+	unsigned int	src_len;
+	unsigned int	i;
+
+	src_len = 0;
+	i = 0;
+	while (src[src_len] != '\0')
+	{
+		src_len++;
+	}
+	if (size > 0)
+	{
+		while (src[i] != '\0' && i < size - 1)
+		{
+			dest[i] = src[i];
+			i++;
+		}
+		dest[i] = '\0';
+	}
+	return (src_len);
 }
