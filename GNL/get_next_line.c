@@ -49,19 +49,23 @@ char **get_string_array(char *buffer, int fd, char **stack)
 	int stack_position_i;
 	int bytes_read;
 	char *line;
-	int	i;
+	int line_size;
 
 	stack = malloc(get_n_times(fd) * sizeof(char *));
+	if (!stack)
+		return (NULL);
 	stack_position_i = 0;
 	while ((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		line = malloc(get_substring_size(fd) * sizeof(char));
-		line[i] = buffer[i];
-		i++;
-		if (buffer[i] == '\n')
+		line_size = get_substring_size(fd);
+		line = malloc(line_size * sizeof(char));
+		if (!line)
+			return (NULL);
+		if (*buffer == '\n')
 		{
-			ft_memmove(stack[stack_position_i], line, i);
+			ft_memmove(stack[stack_position_i], line, line_size + 1);
 			stack_position_i++;
+			free(line);
 		}
 	}
 	return (stack);
@@ -69,48 +73,34 @@ char **get_string_array(char *buffer, int fd, char **stack)
 
 int get_n_times(int fd)
 {
-	char	temp_buf;
+	char	*temp_buf;
 	int		size;
 	int		i;
 	int		bytes_read;
 
 	temp_buf = malloc(BUFFER_SIZE);
 	size = 0;
+	i = 0;
 	while ((bytes_read = read(fd, temp_buf, BUFFER_SIZE)) > 0)
-	{
-		size++;
-		if (temp_buf == '\n')
-			i++;
-	}
-	while (size > 0)
-	{
-		read(fd, temp_buf, -1);
-		size--;
-	}
+			if (*temp_buf == '\n')
+				i++;
 	return (i);
 }
 int get_substring_size(int fd)
 {
-	char	temp_buffer;
+	char	*temp_buffer;
 	int		size;
-	int		i;
 	int		bytes_read;
 
 	temp_buffer = malloc(BUFFER_SIZE);
 	size = 0;
 	while ((bytes_read = read(fd, temp_buffer, BUFFER_SIZE)) > 0)
 	{
-		size++;
-		if (temp_buffer == '\n')
+		if (*temp_buffer == '\n')
 			break ;
+		size++;
 	}
-	i = size;
-	while (size > 0)
-	{
-		read(fd, temp_buffer, -1);
-		size--;
-	}
-	return (i);
+	return (size);
 }
 
 // char *get_next_line(int fd)
