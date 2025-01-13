@@ -6,16 +6,16 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:04:49 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/12/11 18:07:03 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:17:33 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Shift down all elements of stack a by 1.
 // The last element becomes the first one.
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
-void	rra(t_stack **stack_a)
+void	rra(t_stack **stack_a, int *count)
 {
 	t_stack	*tmp;
 	t_stack	*last;
@@ -34,8 +34,9 @@ void	rra(t_stack **stack_a)
 	}
 	before_last->next = NULL;
 	last->next = tmp;
+	(*count)++;
 }
-void	rrb(t_stack **stack_b)
+void	rrb(t_stack **stack_b, int *count)
 {
 	t_stack	*tmp;
 	t_stack	*last;
@@ -54,10 +55,12 @@ void	rrb(t_stack **stack_b)
 	}
 	before_last->next = NULL;
 	last->next = tmp;
+	(*count)++;
 }
 
-void	rrr(t_stack **stack_a, t_stack **stack_b)
+void	rrr(t_stack **stack_a, t_stack **stack_b, int *count)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	rra(stack_a, count);
+	rrb(stack_b, count);
+	(*count)--;
 }

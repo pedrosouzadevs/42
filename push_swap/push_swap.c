@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:12:29 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/12/11 18:24:06 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:24:50 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int main(int argc, char **argv)
 {
 	t_stack *stack_a;
 	t_stack *stack_b;
+	int	*count;
 
 	if (argc == 2)
 	{
@@ -25,64 +26,43 @@ int main(int argc, char **argv)
 			write(1, "Error\n", 6);
 			return (1);
 		}
-		stack_b = ft_create_stack_b();
 	}
 	else if (argc > 2)
-	{
 		stack_a = ft_create_stack_without_split(argv);
-		stack_b = ft_create_stack_b();
-	}
+
 	else
 	{
 		write(1, "Error\n", 6);
 		return (1);
 	}
+	stack_b = ft_create_stack_b();
+	ft_shuffle(&stack_a, &stack_b, count);
 	while (stack_a)
 	{
 		printf("%d\n", stack_a->number);
 		stack_a = stack_a->next;
 	}
+	while (stack_b)
+	{
+		printf("Stack B\n");
+		if (ft_lstsize(stack_b) == 0)
+			break ;
+		else
+		{
+			printf("%d\n", stack_b->number);
+			stack_b = stack_b->next;
+		}
+	}
 	free(stack_b);
 	return (0);
 }
 
-t_stack *ft_create_stack_with_split(char *str)
+void ft_shuffle(t_stack **stack_a, t_stack **stack_b, int *count)
 {
-	t_stack *stack_a;
-	char **split;
-	int i;
+	t_stack *tmp;
 
-	i = 0;
-	split = ft_split(str, ' ');
-	stack_a = ft_lstnew(ft_atoi(split[i]));
-	i++;
-	while (split[i])
-	{
-		ft_lstadd_back(&stack_a, ft_lstnew(ft_atoi(split[i])));
-		i++;
-	}
-	return (stack_a);
-}
-t_stack *ft_create_stack_without_split(char **argv)
-{
-	t_stack *stack_a;
-	int i;
+	count = 0;
+	while (*stack_a)
+		sa(stack_a, count);
 
-	i = 1;
-	stack_a = ft_lstnew(ft_atoi(argv[i]));
-	i++;
-	while (argv[i])
-	{
-		ft_lstadd_back(&stack_a, ft_lstnew(ft_atoi(argv[i])));
-		i++;
-	}
-	return (stack_a);
-}
-
-t_stack	*ft_create_stack_b(void)
-{
-	t_stack *stack_b;
-
-	stack_b = malloc(sizeof(t_stack));
-	return (stack_b);
 }
