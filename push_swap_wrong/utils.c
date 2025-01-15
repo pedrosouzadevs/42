@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:20:48 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/01/13 12:50:47 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:01:14 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_stack *ft_create_stack_with_split(char *str)
 
 	i = 0;
 	split = ft_split(str, ' ');
+	stack_a = malloc(sizeof(t_stack));
 	stack_a = ft_lstnew(ft_atoi(split[i]));
 	i++;
 	while (split[i])
