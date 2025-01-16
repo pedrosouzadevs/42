@@ -84,8 +84,6 @@ int	ft_count_unbr(unsigned int n)
 		count = 1;
 	else
 	{
-		if (wres < 0)
-			wres = wres * -1;
 		while (wres != 0)
 		{
 			wres = wres / 10;

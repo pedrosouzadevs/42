@@ -10,32 +10,55 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = ft_printf.c ft_itoa_hex.c ft_utils.c ft_itoa.c ft_itoa_unsigned.c ft_itoa_ptr.c ft_trans.c
+SRC_CLIENT = printf/ft_printf.c \
+			printf/ft_itoa_hex.c \
+			printf/ft_utils.c \
+			printf/ft_itoa.c \
+			printf/ft_itoa_unsigned.c \
+			printf/ft_itoa_ptr.c \
+			printf/ft_trans.c \
+			utils.c \
+			client.c
 
-HEADER = ft_printf.h
+SRC_SERVER = printf/ft_printf.c \
+			printf/ft_itoa_hex.c \
+			printf/ft_utils.c \
+			printf/ft_itoa.c \
+			printf/ft_itoa_unsigned.c \
+			printf/ft_itoa_ptr.c \
+			printf/ft_trans.c \
+			utils.c \
+			server.c
 
-OBJ = ${SRC:.c=.o}
+HEADER = printf/ft_printf.h minitalk.h
+
+OBJ_CLIENT = ${SRC_CLIENT:.c=.o}
+OBJ_SERVER = ${SRC_SERVER:.c=.o}
 
 CC = cc
 
 CCFLAGS = -Wall -Wextra -Werror
 
-NAME = libftprintf.a
+NAME_CLIENT = client
+NAME_SERVER = server
 
 .c.o:
 	${CC} ${CCFLAGS} -c $< -o $@
 
-all: ${NAME}
+all: ${NAME_CLIENT} ${NAME_SERVER}
 
-$(NAME): ${OBJ}
-	ar rcs ${NAME} ${OBJ} ${HEADER}
+$(NAME_CLIENT): ${OBJ_CLIENT}
+	${CC} ${CCFLAGS} ${OBJ_CLIENT} -o ${NAME_CLIENT}
+
+$(NAME_SERVER): ${OBJ_SERVER}
+	${CC} ${CCFLAGS} ${OBJ_SERVER} -o ${NAME_SERVER}
 
 clean:
-	rm -f ${OBJ}
+	rm -f ${OBJ_CLIENT} ${OBJ_SERVER}
+
 fclean: clean
-	rm -f ${NAME}
+	rm -f ${NAME_CLIENT} ${NAME_SERVER}
 
 re: fclean all
-
 
 .PHONY: all clean fclean re
