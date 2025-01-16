@@ -6,7 +6,7 @@
 /*   By: rheringe <rheringe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:06:10 by rheringe          #+#    #+#             */
-/*   Updated: 2025/01/10 18:24:15 by rheringe         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:34:04 by rheringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	set_position(t_stack *stack)
 			stack->above_center = FALSE;
 		stack = stack->next;
 		++current_position;
-	}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+	}
 }
 
 int	find_first_pos(t_stack *stack)

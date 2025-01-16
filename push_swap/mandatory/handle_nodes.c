@@ -6,7 +6,7 @@
 /*   By: rheringe <rheringe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 11:38:59 by rheringe          #+#    #+#             */
-/*   Updated: 2025/01/13 19:01:41 by rheringe         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:19:03 by rheringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_stack	*find_last_node(t_stack *stack)
 		stack = stack->next;
 	return (stack);
 }
+
 t_stack	*get_node(t_stack *stack, int pos)
 {
 	while (stack != NULL)

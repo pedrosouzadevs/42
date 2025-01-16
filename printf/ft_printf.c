@@ -27,7 +27,7 @@ int	ft_printf(const char *string, ...)
 			ft_transform(args, (char *)string, &count);
 		}
 		else
-			ft_putchar_fd(*string, 1, &count);
+			ft_putchar_fd_c(*string, 1, &count);
 		string++;
 	}
 	va_end(args);
@@ -37,7 +37,7 @@ int	ft_printf(const char *string, ...)
 void	ft_transform(va_list args, char *string, int *count)
 {
 	if (*string == 'c')
-		ft_putchar_fd(va_arg(args, int), 1, count);
+		ft_putchar_fd_c(va_arg(args, int), 1, count);
 	else if (*string == 's')
 		ft_trans_str(va_arg(args, char *), count);
 	else if (*string == 'p')
@@ -53,5 +53,5 @@ void	ft_transform(va_list args, char *string, int *count)
 	else if (*string == 'X')
 		ft_trans_hex(va_arg(args, int), "0123456789ABCDEF", count);
 	else if (*string == '%')
-		ft_putchar_fd('%', 1, count);
+		ft_putchar_fd_c('%', 1, count);
 }

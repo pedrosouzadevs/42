@@ -14,7 +14,7 @@
 
 char	*ft_convert_nbr_to_char(char *result, int i, int wres);
 
-void	ft_itoa(int n, int *count)
+void	ft_itoa_c(int n, int *count)
 {
 	char	*result;
 	int		i;
@@ -28,17 +28,17 @@ void	ft_itoa(int n, int *count)
 	if (n == -2147483648)
 	{
 		free(result);
-		ft_putstr_fd("-2147483648", 1, count);
+		ft_putstr_fd_c("-2147483648", 1, count);
 	}
 	else if (n == 0)
 	{
 		free(result);
-		ft_putstr_fd("0", 1, count);
+		ft_putstr_fd_c("0", 1, count);
 	}
 	else
 	{
 		ft_convert_nbr_to_char(result, i, wres);
-		ft_putstr_fd(result, 1, count);
+		ft_putstr_fd_c(result, 1, count);
 		free(result);
 	}
 }

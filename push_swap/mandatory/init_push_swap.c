@@ -6,18 +6,18 @@
 /*   By: rheringe <rheringe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 13:53:35 by rheringe          #+#    #+#             */
-/*   Updated: 2025/01/10 11:26:08 by rheringe         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:41:26 by rheringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include "../includes/libft.h"
 
 t_push	*init_push_swap(int argc, char **argv)
 {
 	t_push	*push_swap;
+
 	push_swap = (t_push *)malloc(sizeof(t_push));
-	if(!push_swap)
+	if (!push_swap)
 		message_error(EXIT_FAILURE);
 	push_swap->stack_a = NULL;
 	push_swap->stack_b = NULL;
@@ -57,7 +57,7 @@ void	link_node(t_stack **stack, int value)
 	t_stack	*last_node;
 
 	new_node = create_node(value);
-	if(!*stack)
+	if (!*stack)
 		*stack = new_node;
 	else
 	{

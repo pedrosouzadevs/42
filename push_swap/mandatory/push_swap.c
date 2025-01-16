@@ -6,13 +6,13 @@
 /*   By: rheringe <rheringe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:22:52 by rheringe          #+#    #+#             */
-/*   Updated: 2025/01/13 15:15:52 by rheringe         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:22:37 by rheringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_push	*push_swap;
 

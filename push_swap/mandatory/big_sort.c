@@ -6,7 +6,7 @@
 /*   By: rheringe <rheringe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:13:50 by rheringe          #+#    #+#             */
-/*   Updated: 2025/01/13 17:43:28 by rheringe         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:25:18 by rheringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ void	big_sort(t_push *push_swap)
 	while (push_swap->stack_a != smallest_node)
 		end_sorting(push_swap, smallest_node, a);
 }
+
 void	move_all_to_b(t_push *push_swap)
 {
 	t_stack	*second_bigger;
 	t_stack	*biggest_node;
-	t_stack *smallest_node;
+	t_stack	*smallest_node;
 	int		biggest_pos;
 	int		smallest_pos;
 
@@ -81,18 +82,18 @@ void	lcost_to_top(t_push *push_swap)
 
 void	end_sorting(t_push *push_swap, t_stack *top_node, t_name name)
 {
-    if (name == a)
-    {
-        if (top_node->above_center)
-            rotate(push_swap, ra, TRUE);
-        else if (!(top_node->above_center))
-            reverse_rotate(push_swap, rra, TRUE);
-    }
-    else if (name == b)
-    {
-        if (top_node->above_center)
-            rotate(push_swap, rb, TRUE);
-        else if (!(top_node->above_center))
-            reverse_rotate(push_swap, rrb, TRUE);
-    }
+	if (name == a)
+	{
+		if (top_node->above_center)
+			rotate(push_swap, ra, TRUE);
+		else if (!(top_node->above_center))
+			reverse_rotate(push_swap, rra, TRUE);
+	}
+	else if (name == b)
+	{
+		if (top_node->above_center)
+			rotate(push_swap, rb, TRUE);
+		else if (!(top_node->above_center))
+			reverse_rotate(push_swap, rrb, TRUE);
+	}
 }

@@ -19,8 +19,8 @@
 # include <stdlib.h>
 
 int		ft_printf(const char *string, ...);
-void	ft_putchar_fd(char c, int fd, int *count);
-void	ft_putstr_fd(char *s, int fd, int *count);
+void	ft_putchar_fd_c(char c, int fd, int *count);
+void	ft_putstr_fd_c(char *s, int fd, int *count);
 void	ft_trans_ptr(void *p, char *base, int *count);
 void	ft_transform(va_list args, char *string, int *count);
 void	ft_trans_number(int number, int *count);
@@ -28,7 +28,7 @@ void	ft_trans_hex(int number, char *base, int *count);
 void	ft_trans_unsigned_number(unsigned int number, int *count);
 void	ft_trans_str(char *str, int *count);
 void	ft_itoa_hex(unsigned int n, char *base, int *count);
-void	ft_itoa(int n, int *count);
+void	ft_itoa_c(int n, int *count);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_count_nbr(int n);
 void	ft_itoa_unsigned(unsigned int n, int *count);

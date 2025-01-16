@@ -26,12 +26,12 @@ void	ft_itoa_unsigned(unsigned int n, int *count)
 	if (n == 0)
 	{
 		free(result);
-		ft_putstr_fd("0", 1, count);
+		ft_putstr_fd_c("0", 1, count);
 	}
 	else
 	{
 		ft_convert_nbr_to_char_unsigned(result, i, wres);
-		ft_putstr_fd(result, 1, count);
+		ft_putstr_fd_c(result, 1, count);
 		free(result);
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: rheringe <rheringe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:59 by rheringe          #+#    #+#             */
-/*   Updated: 2025/01/10 11:23:52 by rheringe         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:27:39 by rheringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-size_t stack_length(t_stack *stack)
+size_t	stack_length(t_stack *stack)
 {
 	size_t	length;
 
@@ -42,10 +42,11 @@ t_bool	check_ordered(t_stack *stack)
 	}
 	return (TRUE);
 }
+
 void	free_stack(t_stack **stack)
 {
 	t_stack	*temp;
-	
+
 	if (stack != NULL)
 	{
 		while (*stack)
@@ -54,7 +55,6 @@ void	free_stack(t_stack **stack)
 			*stack = (*stack)->next;
 			free(temp);
 		}
-		*stack = NULL;                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+		*stack = NULL;
 	}
 }
-

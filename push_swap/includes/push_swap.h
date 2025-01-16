@@ -6,22 +6,24 @@
 /*   By: rheringe <rheringe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:24:10 by rheringe          #+#    #+#             */
-/*   Updated: 2025/01/13 16:49:29 by rheringe         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:16:33 by rheringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
-# define EXIT_NO_ARGS -1
-# define EXIT_SUCCESS 0
-# define EXIT_FAILURE 1
+# include "../libs/libft/libft.h"
+
+# define INT_MAX		2147483647
+# define INT_MIN		-2147483648
+# define EXIT_NO_ARGS 	-1
+# define EXIT_SUCCESS 	0
+# define EXIT_FAILURE 	1
 
 typedef enum e_bool
 {
@@ -106,7 +108,7 @@ void	set_position(t_stack *stack);
 
 //small_sort functions
 void	small_sort(t_push *push_swap);
-void	sort_three (t_push *push_swap);
+void	sort_three(t_push *push_swap);
 void	sort_few_elements(t_push *push_swap);
 
 //big_sort functions
@@ -119,11 +121,9 @@ int		find_biggest_position(t_stack *stack);
 //big_sort_utils functions
 void	set_match_node(t_stack *stack_a, t_stack *stack_b);
 void	set_cost(t_stack *stack_a, t_stack *stack_b);
-void 	set_lcost(t_stack *stack, int value);
+void	set_lcost(t_stack *stack, int value);
 t_stack	*get_second_bigger(t_stack *stack);
 t_stack	*get_third_bigger(t_stack *stack);
-
-
 
 //movments functions
 void	swap(t_push *push_swap, t_mv type, t_bool print_mv);
@@ -135,7 +135,6 @@ void	execute_push(t_stack **dst_stack, t_stack **src_stack);
 void	reverse_rotate(t_push *push_swap, t_mv type, t_bool print_mv);
 void	execute_rev_rot(t_stack **stack);
 
-int main(int argc, char **argv);
+int		main(int argc, char **argv);
 
 #endif
-

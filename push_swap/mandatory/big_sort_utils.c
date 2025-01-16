@@ -6,7 +6,7 @@
 /*   By: rheringe <rheringe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:53:19 by rheringe          #+#    #+#             */
-/*   Updated: 2025/01/13 17:42:39 by rheringe         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:36:29 by rheringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	set_match_node(t_stack *stack_a, t_stack *stack_b)
 		stack_b = stack_b->next;
 	}
 }
+
 void	set_cost(t_stack *stack_a, t_stack *stack_b)
 {
 	t_stack	*head;
@@ -68,14 +69,16 @@ void	set_cost(t_stack *stack_a, t_stack *stack_b)
 		stack_b = stack_b->next;
 	}
 }
-void set_lcost(t_stack *stack, int value)
+
+void	set_lcost(t_stack *stack, int value)
 {
-    while (stack != NULL)
-    {
-        stack->lcost = value;
-        stack = stack->next;
-    }
+	while (stack != NULL)
+	{
+		stack->lcost = value;
+		stack = stack->next;
+	}
 }
+
 t_stack	*get_second_bigger(t_stack *stack)
 {
 	t_stack	*biggest;
