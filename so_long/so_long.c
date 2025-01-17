@@ -11,8 +11,8 @@
 
 #define WIDTH 1500
 #define HEIGHT 800
-#define JUMP_SPEED -1  // Velocidade para subir
-#define GRAVITY 1      // Velocidade para descer
+#define JUMP_SPEED -2  // Velocidade para subir
+#define GRAVITY 2      // Velocidade para descer
 #define INITIAL_Y 730    // Posição inicial no eixo Y
 #define JUMP_DISTANCE 50  // Distância máxima do salto
 

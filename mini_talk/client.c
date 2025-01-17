@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:07:43 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/01/15 16:41:43 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/17 08:54:04 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 {
 	pid_t	pid;
 	char	*message;
-	int 	i;
+	int		i;
 
 	g_server_ack = BUSY;
 	i = 0;

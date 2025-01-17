@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:08:05 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/01/15 16:45:30 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/17 08:55:01 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@
 # include <stdbool.h>
 # include "printf/ft_printf.h"
 
-void	ft_putnbr_fd(int n, int fd);
-int		ft_strlen(const char *s);
-void	ft_putchar(char c);
-int     ft_atoi(const char *str);
+enum e_ack
+{
+	BUSY,
+	READY
+};
+
+void	kill_made(pid_t pid, int signo);
+void	signal_made(int signo, void *handler, bool use_siginfo);
 
 #endif
