@@ -1,0 +1,2 @@
+Fazer um mapa maior verticalmente para fazer um deslocamento vertical(perguntar para o charGPT como fazer)
+Tentar adicionar um placar na parte de cima do mapa
