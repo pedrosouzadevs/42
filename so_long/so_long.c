@@ -17,6 +17,7 @@
 #define JUMP_DISTANCE 50  // Distância máxima do salto
 
 static mlx_image_t* image;
+static mlx_image_t* img;
 static bool is_moving_up = false;
 static bool is_jump_enabled = true;
 static int jump_start_y;
@@ -102,18 +103,18 @@ int32_t main(void)
         puts(mlx_strerror(mlx_errno));
         return(EXIT_FAILURE);
     }
-    if (!(image = mlx_new_image(mlx, 40, 70)))
-    {
-        mlx_close_window(mlx);
-        puts(mlx_strerror(mlx_errno));
-        return(EXIT_FAILURE);
-    }
-    if (mlx_image_to_window(mlx, image, 750, INITIAL_Y) == -1)
-    {
-        mlx_close_window(mlx);
-        puts(mlx_strerror(mlx_errno));
-        return(EXIT_FAILURE);
-    }
+    // if (!(image = mlx_new_image(mlx, 40, 70)))
+    // {
+    //     mlx_close_window(mlx);
+    //     puts(mlx_strerror(mlx_errno));
+    //     return(EXIT_FAILURE);
+    // }
+    // if (mlx_image_to_window(mlx, image, 750, INITIAL_Y) == -1)
+    // {
+    //     mlx_close_window(mlx);
+    //     puts(mlx_strerror(mlx_errno));
+    //     return(EXIT_FAILURE);
+    // }
 
     mlx_loop_hook(mlx, ft_randomize, mlx);
     mlx_loop_hook(mlx, ft_hook, mlx);
