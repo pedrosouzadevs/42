@@ -17,7 +17,7 @@ void init_images(t_game *game)
     int img_width;
     int img_height;
 
-    game->map.wall_img = mlx_xpm_file_to_image(game->mlx, "assets/floor.xpm", &img_width, &img_height);
+    game->map.wall_img = mlx_xpm_file_to_image(game->mlx, "assets/wall.xpm", &img_width, &img_height);
     game->map.collectible_img = mlx_xpm_file_to_image(game->mlx, "assets/floor.xpm", &img_width, &img_height);
     game->map.exit_img = mlx_xpm_file_to_image(game->mlx, "assets/floor.xpm", &img_width, &img_height);
     game->map.floor_img = mlx_xpm_file_to_image(game->mlx, "assets/floor.xpm", &img_width, &img_height);
