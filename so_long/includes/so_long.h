@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:38:44 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/01/27 16:42:06 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:24:43 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_player
 	void *image;
 	int x;
 	int y;
-	int jump;
-	int initial_y;
+	int	prev_x;
+	int	prev_y;
 } t_player;
 
 typedef struct s_map
@@ -46,6 +46,7 @@ typedef struct s_map
 	int exit;
 	int enemies;
 	void *wall_img;
+	void *platform_img;
 	void *collectible_img;
 	void *exit_img;
 	void *enemy_img;
@@ -79,5 +80,8 @@ void	verify_map(t_game *game);
 void	find_player_position(t_game *game);
 void	error_wall(void);
 void	error_none_player_exit_colec(void);
+int	is_edge_wall(t_game *game);
+void	is_map_retangle(t_game *game);
+void	refresh_map(t_game *game);
 
 #endif

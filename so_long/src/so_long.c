@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:02:21 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/01/27 17:18:11 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:13:02 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,37 @@
 
 int is_wall(t_game *game, int x, int y)
 {
-    int map_x = x / TILE_SIZE;
-    int map_y = y / TILE_SIZE;
-    return (game->map.map[map_y][map_x] == '1');
+	int map_x = x / TILE_SIZE;
+	int map_y = y / TILE_SIZE;
+	return (game->map.map[map_y][map_x] == '1');
 }
-
-void	setting_jump(t_game *game)
-{
-	game->player.jump = 50;
-	game->player.initial_y = game->player.y;  // Registrar a posição inicial do salto
-}
-
 void ft_hook(void* param)
 {
-    t_game *game;
+	t_game *game;
 
-    game = param;
-
-	setting_jump(game);
-    if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+	game = param;
+	game->player.prev_x = game->player.x;
+	game->player.prev_y = game->player.y;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 
-    // Movimento lateral
-    if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-        game->player.x -= 50;
-    if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-        game->player.x  += 50;
+	// Movimento lateral
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+		game->player.x -= 100;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		game->player.x  += 100;
 
-    if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-    {
-        game->player.y  -= 50;
-    }
-    // Movimento vertical (salto)
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+	{
+		game->player.y  -= 100;
+	}
+	// Movimento vertical (salto)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
-		game->player.y  += 50;
+		game->player.y  += 100;
 	}
-	mlx_clear_window(game->mlx, game->window);
-	render_map(game);
-    mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);
+
+	mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);
 }
 
 int main(int argc, char **argv)
@@ -76,13 +68,13 @@ int main(int argc, char **argv)
 		write(2, "Erro ao ler o mapa\n", 20);
 		return 1;
 	}
-	game->mlx = mlx_init((game->map.width * 100), (game->map.height * 100), "Meu Jogo 2D", true);
+	game->mlx = mlx_init((game->map.width * 80), (game->map.height * 80), "Meu Jogo 2D", true);
     if (!game->mlx) {
         write(2, "Erro ao inicializar o MinilibX\n", 30);
 		free(game);
         return 1;
     }
-    game->window= mlx_new_image(game->mlx, (game->map.width * 100), (game->map.height * 100));
+    game->window= mlx_new_image(game->mlx, (game->map.width * 80), (game->map.height * 80));
 	if (!game->window)
 	{
 		write(2, "Erro ao criar a janela\n", 24);
