@@ -65,9 +65,6 @@ typedef struct s_game
 #define GRAVITY 25      // Velocidade para descer
 #define JUMP_HEIGHT 150  // Distância máxima do salto
 #define JUMP_DISTANCE 50  // Distância máxima do salto
-static bool is_moving_up;
-static bool is_jump_enabled;
-static bool is_moving_down;
 
 
 char **read_map(char **argv, t_game *game);
