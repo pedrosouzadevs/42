@@ -1,5 +1,5 @@
 NAME	:= so_long
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -fPIE
 LIBMLX	:= ./MLX42
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
@@ -32,10 +32,11 @@ libmlx:
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
 $(NAME): $(OBJ) $(LIB_OBJ)
-	@$(CC) $(OBJ) $(LIB_OBJ) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJ) $(LIB_OBJ) $(LIBS) $(HEADERS) -pie -o $(NAME)
 
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJ)
+	@rm -rf $(LIB_OBJ)
 	@rm -rf $(LIBMLX)/build
 
 fclean: clean

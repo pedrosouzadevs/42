@@ -16,30 +16,40 @@ void init_images(t_game *game)
 {
 	xpm_t* xpm;
 
-	xpm = mlx_load_xpm42("assets/wall.xpm42");
-	game->map.wall_img = mlx_texture_to_image(game->mlx, &xpm->texture);
-	mlx_delete_xpm42(xpm);
-
-	xpm = mlx_load_xpm42("assets/floor.xpm42");
+	xpm = mlx_load_xpm42("assets/collectable/Water-stone-b.xpm42");
 	game->map.collectible_img = mlx_texture_to_image(game->mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
-
-	xpm = mlx_load_xpm42("assets/wall.xpm42");
-	game->map.exit_img = mlx_texture_to_image(game->mlx, &xpm->texture);
+	xpm = mlx_load_xpm42("assets/exit/exit1_c.xpm42");
+	game->map.exit_close_img = mlx_texture_to_image(game->mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
-
-	xpm = mlx_load_xpm42("assets/wall.xpm42");
+	xpm = mlx_load_xpm42("assets/wall/platform.xpm42");
 	game->map.platform_img = mlx_texture_to_image(game->mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
-
-	xpm = mlx_load_xpm42("assets/floor.xpm42");
+	xpm = mlx_load_xpm42("assets/floor/floor.xpm42");
 	game->map.floor_img = mlx_texture_to_image(game->mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
-
-	xpm = mlx_load_xpm42("assets/sf1_b.xpm42");
+	xpm = mlx_load_xpm42("assets/player/sf1_b.xpm42");
 	game->player.image= mlx_texture_to_image(game->mlx, &xpm->texture);
-	mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
 	mlx_delete_xpm42(xpm);
+	xpm = mlx_load_xpm42("assets/exit/exit1_o.xpm42");
+	game->map.exit_open_img= mlx_texture_to_image(game->mlx, &xpm->texture);
+	mlx_delete_xpm42(xpm);
+	xpm = mlx_load_xpm42("assets/wall/wall.xpm42");
+	game->map.wall_img= mlx_texture_to_image(game->mlx, &xpm->texture);
+	mlx_delete_xpm42(xpm);
+	resize_images(game);
+	game->map.exit_opened = false;
+}
+void resize_images(t_game *game)
+{
+
+	mlx_resize_image(game->map.exit_close_img, TILE_SIZE, TILE_SIZE);
+	mlx_resize_image(game->map.platform_img, TILE_SIZE, TILE_SIZE);
+	mlx_resize_image(game->map.exit_open_img, TILE_SIZE, TILE_SIZE);
+	mlx_resize_image(game->map.wall_img, TILE_SIZE, TILE_SIZE);
+	mlx_resize_image(game->map.floor_img, TILE_SIZE, TILE_SIZE);
+	mlx_resize_image(game->map.platform_img, TILE_SIZE, TILE_SIZE);
+	mlx_resize_image(game->map.collectible_img, TILE_SIZE, TILE_SIZE);
 }
 void render_map(t_game *game) {
 	int y;
@@ -47,12 +57,12 @@ void render_map(t_game *game) {
 
 	y = 0;
 	while (game->map.map[y])
-	{ // Percorre as linhas do mapa
+	{
 		x = 0;
 		while (game->map.map[y][x])
-		{ // Percorre os caracteres da linha
+		{
 			if (game->map.map[y][x] == '1')
-				if (is_edge_wall(game))
+				if (is_edge_wall(game, x, y))
 					mlx_image_to_window(game->mlx, game->map.platform_img, x * TILE_SIZE, y * TILE_SIZE);
 				else
 					mlx_image_to_window(game->mlx, game->map.wall_img, x * TILE_SIZE, y * TILE_SIZE);
@@ -60,7 +70,11 @@ void render_map(t_game *game) {
 			{
 				mlx_image_to_window(game->mlx, game->map.floor_img, x * TILE_SIZE, y * TILE_SIZE);
 				if (game->map.map[y][x] == 'E')
-					mlx_image_to_window(game->mlx, game->map.exit_img, x * TILE_SIZE, y * TILE_SIZE);
+				{
+					mlx_image_to_window(game->mlx, game->map.exit_close_img, x * TILE_SIZE, y * TILE_SIZE);
+					game->map.exit_x = x;
+					game->map.exit_y = y;
+				}
 				else if (game->map.map[y][x] == 'C')
 					mlx_image_to_window(game->mlx, game->map.collectible_img, x * TILE_SIZE, y * TILE_SIZE);
 				else if (game->map.map[y][x] == 'T')
@@ -72,34 +86,17 @@ void render_map(t_game *game) {
 	}
 }
 
-void	verify_wall(t_game *game)
+int	is_edge_wall(t_game *game, int x, int y)
 {
-	if (is_edge_wall(game))
-		error_wall();
-}
-int	is_edge_wall(t_game *game)
-{
-	int y;
-	int x;
 
-	y = 0;
-	while (y < game->map.height)
-	{
-		x = 0;
-		while (x < game->map.width)
-		{
-			if (y == 0 || y == game->map.height - 1)
-				if (x >= 0 && x <= game->map.width - 1)
-					if (game->map.map[y][x] != '1')
-					return (1);
-			if (y > 0 && y < (game->map.height - 1))
-				if (x == 0 || x == game->map.width - 1)
-					if (game->map.map[y][x] != '1')
-					return (1);
-			x++;
-		}
-		y++;
-	}
+	if (y == 0 || y == game->map.height - 1)
+		if (x >= 0 && x <= game->map.width - 1)
+			if (game->map.map[y][x] != '1')
+				return (1);
+	if (y > 0 && y < (game->map.height - 1))
+		if (x == 0 || x == game->map.width - 1)
+			if (game->map.map[y][x] != '1')
+				return (1);
 	return (0);
 }
 
@@ -108,16 +105,18 @@ void	verify_map(t_game *game)
 	int y = 0;
 	int x = 0;
 
-	while (game->map.map[y]) { // Percorre as linhas do mapa
+	while (game->map.map[y]) {
 		x = 0;
 		while (game->map.map[y][x])
-		{ // Percorre os caracteres da linha
+		{
 			if (game->map.map[y][x] == 'E')
 				game->map.exit++;
 			if (game->map.map[y][x] == 'C')
 				game->map.collectibles++;
 			if (game->map.map[y][x] == 'P')
 				game->map.player++;
+			if (is_edge_wall(game, x, y))
+				error_wall();
 			x++;
 		}
 		y++;
