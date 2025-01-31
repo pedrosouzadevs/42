@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/nfs/homes/pedro-hm/42/projetos/mini_talk",
-      "program": "/nfs/homes/pedro-hm/42/projetos/mini_talk/build/Debug/outDebug",
+      "cwd": "/nfs/homes/pedro-hm/42/minitalk-01",
+      "program": "/nfs/homes/pedro-hm/42/minitalk-01/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

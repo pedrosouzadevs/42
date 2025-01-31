@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:07:43 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/01/29 13:03:19 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:05:47 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 static volatile sig_atomic_t	g_server_ack;
 
 static void	ack_handler(void)
 {
 	g_server_ack = READY;
+}
+
+static void	end_handler(void)
+{
+	write(STDOUT_FILENO, "\t✅ Message received ✅\n", 27);
+	exit(EXIT_SUCCESS);
 }
 
 static void	send_char(char c, pid_t pid)
@@ -53,7 +59,7 @@ int	main(int argc, char **argv)
 	pid = atoi(argv[1]);
 	message = argv[2];
 	signal_made(SIGUSR1, ack_handler, false);
-	signal_made(SIGUSR2, ack_handler, false);
+	signal_made(SIGUSR2, end_handler, false);
 	while (message[i])
 		send_char(message[i++], pid);
 	send_char('\0', pid);
