@@ -6,18 +6,18 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:59:32 by pdro              #+#    #+#             */
-/*   Updated: 2025/01/27 14:28:43 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:35:06 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-char **read_map(char **argv, t_game *game)
+void	read_map(char **argv, t_game *game)
 {
-    int fd;
-	int line_count;
-    char *line;
-    int i;
+	int		fd;
+	int		line_count;
+	char	*line;
+	int		i;
 
 	i = 0;
 	fd = open(argv[1], O_RDONLY);
@@ -32,17 +32,31 @@ char **read_map(char **argv, t_game *game)
 	}
 	close(fd);
 	fd = open(argv[1], O_RDONLY);
+	map_is_not_ber(argv);
+	line = NULL;
+	create_map(game, line, i, fd);
+	close(fd);
+}
+void	map_is_not_ber(char **argv)
+{
 	if (ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])) == NULL)
 	{
-		printf("Error\nmap has to be .ber\n");
+		printf("Error\nMap has to be .ber\n");
 		exit(EXIT_FAILURE);
 	}
-    while ((line = get_next_line(fd))) { // Lê linha por linha usando gnl
-        game->map.map[i++] = line; // Armazena a linha no array de strings
-    }
-    game->map.map[i] = NULL; // Finaliza a matriz com NULL
-    close(fd);
-    return game->map.map;
+}
+
+void	create_map(t_game *game, char *line, int i, int fd)
+{
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line)
+			game->map.map[i++] = line;
+		else
+			break ;
+	}
+	game->map.map[i] = NULL;
 }
 
 void	exit_error(void)
@@ -75,6 +89,7 @@ int	ft_count_lines(int fd)
 	}
 	return (linecount);
 }
+
 int	ft_line_length(int fd)
 {
 	char	buffer[1];

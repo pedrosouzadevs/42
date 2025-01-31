@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:02:21 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/01/29 17:13:02 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:12:17 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,109 @@ void	refresh_player(t_game *game)
 	else
 	{
 		mlx_delete_image(game->mlx, game->player.image);
-		xpm = mlx_load_xpm42("assets/player/sf1_b.xpm42");
-		game->player.image = mlx_texture_to_image(game->mlx, &xpm->texture);
-		mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
+		animate_player(game);
 		mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);
 	}
 
 }
+void animate_player(t_game *game)
+{
+	xpm_t *xpm;
+	int frame;
+
+	double current_time;
+	double time_difference;
+
+	current_time = mlx_get_time();
+	printf("current_time: %f\n", current_time);
+	time_difference = current_time - game->player.last_animation_time;
+	printf("time_difference: %f\n", time_difference);
+	// Se o tempo que passou desde a última animação for maior que 0.1 segundos (ajuste conforme necessário)
+	if (time_difference >= 0.1)
+		game->player.last_animation_time = current_time;
+	printf("last_animation_time: %d\n", game->player.last_animation_time);
+	// Define o quadro atual baseado na contagem de quadros
+	frame = game->player.animation_frame % 3;  // 3 quadros por animação (exemplo)
+
+	mlx_delete_image(game->mlx, game->player.image);
+
+	// Verifica a direção e carrega a imagem apropriada
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D)) { // Movimento para a direita
+		if (frame == 0)
+			xpm = mlx_load_xpm42("assets/player/sr1_b.xpm42");
+		else if (frame == 1)
+			xpm = mlx_load_xpm42("assets/player/sr2_b.xpm42");
+		else
+			xpm = mlx_load_xpm42("assets/player/sr3_b.xpm42");
+	}
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_A)) { // Movimento para a esquerda
+		if (frame == 0)
+			xpm = mlx_load_xpm42("assets/player/sl1_b.xpm42");
+		else if (frame == 1)
+			xpm = mlx_load_xpm42("assets/player/sl2_b.xpm42");
+		else
+			xpm = mlx_load_xpm42("assets/player/sl3_b.xpm42");
+	}
+	else { // Parado
+		xpm = mlx_load_xpm42("assets/player/sf1_b.xpm42"); // Imagem estática
+	}
+
+	game->player.image = mlx_texture_to_image(game->mlx, &xpm->texture);
+	mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
+	mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);
+
+	mlx_delete_xpm42(xpm);
+
+	// Atualiza o contador de animação (para alternar entre os quadros)
+	game->player.animation_frame++;
+}
+
+// void	animate_squirtle_right(t_game *game)
+// {
+// 	xpm_t* xpm;
+
+// 	mlx_delete_image(game->mlx, game->player.image);
+// 	xpm = mlx_load_xpm42("assets/player/sr1_b.xpm42");
+// 	game->player.image = mlx_texture_to_image(game->mlx, &xpm->texture);
+// 	mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
+// 	mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);
+// 	mlx_delete_xpm42(xpm);
+// 	mlx_delete_image(game->mlx, game->player.image);
+// 	xpm = mlx_load_xpm42("assets/player/sr2_b.xpm42");
+// 	game->player.image = mlx_texture_to_image(game->mlx, &xpm->texture);
+// 	mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
+// 	mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);
+// 	mlx_delete_xpm42(xpm);
+// 	mlx_delete_image(game->mlx, game->player.image);
+// 	xpm = mlx_load_xpm42("assets/player/sr3_b.xpm42");
+// 	game->player.image = mlx_texture_to_image(game->mlx, &xpm->texture);
+// 	mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
+// 	mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);
+// }
+
+// void	animate_squirtle_left(t_game *game)
+// {
+// 	xpm_t* xpm;
+
+// 	mlx_delete_image(game->mlx, game->player.image);
+// 	xpm = mlx_load_xpm42("assets/player/sl1_b.xpm42");
+// 	game->player.image = mlx_texture_to_image(game->mlx, &xpm->texture);
+// 	mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
+// 	mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);
+// 	mlx_delete_xpm42(xpm);
+// 	mlx_delete_image(game->mlx, game->player.image);
+// 	xpm = mlx_load_xpm42("assets/player/sl2_b.xpm42");
+// 	game->player.image = mlx_texture_to_image(game->mlx, &xpm->texture);
+// 	mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
+// 	mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);
+// 	mlx_delete_xpm42(xpm);
+// 	mlx_delete_image(game->mlx, game->player.image);
+// 	xpm = mlx_load_xpm42("assets/player/sl3_b.xpm42");
+// 	game->player.image = mlx_texture_to_image(game->mlx, &xpm->texture);
+// 	mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
+// 	mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);
+// }
+
 void calculate_movement(t_game *game)
 {
 	int		x;
@@ -132,7 +228,7 @@ int main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	game = (t_game *)malloc(sizeof(t_game));
-	game->map.map = read_map(argv, game);
+	read_map(argv, game);
 	if (!game->map.map)
 	{
 		ft_printf("Error: map is not readeble\n");
@@ -142,7 +238,6 @@ int main(int argc, char **argv)
     game->window= mlx_new_image(game->mlx, (game->map.width * TILE_SIZE), (game->map.height * TILE_SIZE));
 	init_images(game);
 	verify_map(game);
-	// verify_wall(game);
 	find_player_position(game);
 	render_map(game);
 	mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);

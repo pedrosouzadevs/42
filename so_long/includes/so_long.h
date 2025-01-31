@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:38:44 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/01/29 16:24:43 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:02:02 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_player
 	char east;
 	char west;
 	int	collected;
+	int	animation_frame;
+	int last_animation_time;
 } t_player;
 
 // typedef struct s_wall
@@ -93,14 +95,13 @@ typedef struct s_game
 #define JUMP_DISTANCE 50  // Distância máxima do salto
 
 
-char **read_map(char **argv, t_game *game);
+void	read_map(char **argv, t_game *game);
 void exit_error(void);
 int ft_count_lines(int fd);
 void init_images(t_game *game);
 void render_map(t_game *game);
 int	ft_line_length(int fd);
 void free_game_resources(t_game *game);
-// void	verify_wall(t_game *game);
 void	verify_map(t_game *game);
 void	find_player_position(t_game *game);
 void	error_wall(void);
@@ -117,5 +118,10 @@ void	exit_open(t_game *game);
 void init_walls_coners(t_game *game);
 void	init_walls(t_game *game);
 void resize_images(t_game *game);
+void	create_map(t_game *game, char *line, int i, int fd);
+void	map_is_not_ber(char **argv);
+// void	animate_squirtle_right(t_game *game);
+// void	animate_squirtle_left(t_game *game);
+void animate_player(t_game *game);
 
 #endif
