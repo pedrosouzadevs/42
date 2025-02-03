@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/26 18:59:32 by pdro              #+#    #+#             */
-/*   Updated: 2025/01/31 16:35:06 by pedro-hm         ###   ########.fr       */
+/*   Created: 2025-02-03 17:38:45 by pdro              #+#    #+#             */
+/*   Updated: 2025-02-03 17:38:45 by pdro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	read_map(char **argv, t_game *game)
 	create_map(game, line, i, fd);
 	close(fd);
 }
+
 void	map_is_not_ber(char **argv)
 {
 	if (ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])) == NULL)
@@ -57,12 +58,6 @@ void	create_map(t_game *game, char *line, int i, int fd)
 			break ;
 	}
 	game->map.map[i] = NULL;
-}
-
-void	exit_error(void)
-{
-	printf("Error\nwrong map dimensions\n");
-	exit(EXIT_FAILURE);
 }
 
 int	ft_count_lines(int fd)
