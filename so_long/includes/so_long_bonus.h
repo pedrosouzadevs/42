@@ -25,12 +25,22 @@
 # include <limits.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <time.h>
 # include "../libs/libft/libft.h"
+
+typedef struct s_animation
+{
+	void	*up_image[3];
+	void	*down_image[3];
+	void	*left_image[3];
+	void	*right_image[3];
+}	t_animation;
 
 typedef struct s_player
 {
 	void	*image;
-	void	*image2;
+	t_animation	animation;
+	t_animation	animation2;
 	int		x;
 	int		y;
 	int		prev_x;
@@ -45,6 +55,20 @@ typedef struct s_player
 	int		animation_frame;
 	int		last_animation_time;
 }	t_player;
+
+typedef struct s_enemy
+{
+	void	*image;
+	t_animation	animation;
+	int		x;
+	int		y;
+	int		prev_x;
+	int		prev_y;
+	char	north;
+	char	south;
+	char	east;
+	char	west;
+}	t_enemy;
 
 typedef struct s_map
 {
@@ -73,14 +97,16 @@ typedef struct s_game
 	void		*window;
 	t_player	player;
 	t_map		map;
+	t_enemy		enemy;
 }	t_game;
 
 # define TILE_SIZE 50
-# define MOVE_SIZE 5
+# define MOVE_SIZE 1
 # define JUMP_SPEED 25  // Velocidade para subir
 # define GRAVITY 25      // Velocidade para descer
 # define JUMP_HEIGHT 150  // Distância máxima do salto
 # define JUMP_DISTANCE 50  // Distância máxima do salto
+# define ANIMATION_SPEED 200
 
 void	read_map(char **argv, t_game *game);
 void	exit_error(void);
@@ -107,11 +133,14 @@ void	init_walls(t_game *game);
 void	resize_images(t_game *game);
 void	create_map(t_game *game, char *line, int i, int fd);
 void	map_is_not_ber(char **argv);
-// void animate_player(t_game *game);
+void 	animate_player(t_game *game);
 int		error_readeble_map(void);
 void	player_key_move(t_game *game);
 void	render_map_wall_floor(t_game *game, int x, int y);
 void	render_map_others(t_game *game, int x, int y);
 void	count_exit_colllectibles_player(t_game *game, int x, int y);
+void	animate_player_evolution(t_game *game);
+
+
 
 #endif

@@ -30,7 +30,6 @@
 typedef struct s_player
 {
 	void	*image;
-	void	*image2;
 	int		x;
 	int		y;
 	int		prev_x;
@@ -42,8 +41,6 @@ typedef struct s_player
 	char	east;
 	char	west;
 	int		collected;
-	int		animation_frame;
-	int		last_animation_time;
 }	t_player;
 
 typedef struct s_map

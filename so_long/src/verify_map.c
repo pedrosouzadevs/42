@@ -71,7 +71,6 @@ void	find_player_position(t_game *game)
 	int	x;
 
 	y = 0;
-	game->player.last_animation_time = mlx_get_time();
 	while (game->map.map[y])
 	{
 		x = 0;
