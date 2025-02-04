@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:28:19 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/04 16:24:48 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:54:41 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ void	animate_player_evolution(t_game *game);
 void	enemy_move(t_game *game);
 void	find_enemy_position(t_game *game);
 void	calculate_distance_enemy_to_wall(t_game *game);
+void update_steps_display(mlx_t *mlx, int steps, int x, int y);
+void clear_text_area(mlx_t *mlx, int x, int y, int width, int height, uint32_t bg_color);
 
 
 #endif

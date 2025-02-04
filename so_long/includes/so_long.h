@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:38:44 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/01/31 18:02:02 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:22:12 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_map
 	bool	exit_opened;
 	int		enemies;
 	void	*wall_img;
-	void	*platform_img;
 	void	*collectible_img;
 	void	*exit_close_img;
 	void	*exit_open_img;

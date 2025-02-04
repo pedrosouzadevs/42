@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_images.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-03 17:38:51 by pdro              #+#    #+#             */
-/*   Updated: 2025-02-03 17:38:51 by pdro             ###   ########.fr       */
+/*   Created: 2025/02/03 17:38:51 by pdro              #+#    #+#             */
+/*   Updated: 2025/02/04 17:28:16 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void	init_images(t_game *game)
 	mlx_delete_xpm42(xpm);
 	xpm = mlx_load_xpm42("assets/exit/exit1_c.xpm42");
 	game->map.exit_close_img = mlx_texture_to_image(game->mlx, &xpm->texture);
-	mlx_delete_xpm42(xpm);
-	xpm = mlx_load_xpm42("assets/wall/platform.xpm42");
-	game->map.platform_img = mlx_texture_to_image(game->mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
 	xpm = mlx_load_xpm42("assets/floor/floor.xpm42");
 	game->map.floor_img = mlx_texture_to_image(game->mlx, &xpm->texture);
@@ -44,10 +41,8 @@ void	init_images(t_game *game)
 void	resize_images(t_game *game)
 {
 	mlx_resize_image(game->map.exit_close_img, TILE_SIZE, TILE_SIZE);
-	mlx_resize_image(game->map.platform_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.exit_open_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.wall_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.floor_img, TILE_SIZE, TILE_SIZE);
-	mlx_resize_image(game->map.platform_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.collectible_img, TILE_SIZE, TILE_SIZE);
 }

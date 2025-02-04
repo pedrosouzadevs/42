@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-03 17:38:34 by pdro              #+#    #+#             */
-/*   Updated: 2025-02-03 17:38:34 by pdro             ###   ########.fr       */
+/*   Created: 2025/02/03 17:38:34 by pdro              #+#    #+#             */
+/*   Updated: 2025/02/04 17:18:47 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	refresh_player(t_game *game)
 	if (game->player.collected == game->map.collectibles)
 	{
 		mlx_delete_image(game->mlx, game->player.image);
-		xpm = mlx_load_xpm42("assets/player/wb1_b.xpm42");
+		xpm = mlx_load_xpm42("assets/player/war_b.xpm42");
 		game->player.image = mlx_texture_to_image(game->mlx, &xpm->texture);
 		mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
 		mlx_image_to_window(game->mlx, game->player.image,

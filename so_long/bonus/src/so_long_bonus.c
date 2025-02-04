@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:35:55 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/04 16:25:31 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:10:47 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_hook(void *param)
 	movement_with_collision(game);
 	calculate_movement(game);
 	enemy_move(game);
+	// refresh_player(game);
+	update_steps_display(game->mlx, game->player.count, 85, 10);
 	exit_open(game);
 }
 
@@ -61,4 +63,31 @@ int	error_readeble_map(void)
 {
 	ft_printf("Error: map is not readeble\n");
 	return (EXIT_FAILURE);
+}
+
+void clear_text_area(mlx_t *mlx, int x, int y, int width, int height, uint32_t bg_color)
+{
+    mlx_image_t *bg = mlx_new_image(mlx, width, height);
+
+    for (int i = 0; i < width; i++)
+        for (int j = 0; j < height; j++)
+            mlx_put_pixel(bg, i, j, bg_color);
+
+    mlx_image_to_window(mlx, bg, x, y);
+}
+
+void update_steps_display(mlx_t *mlx, int steps, int x, int y)
+{
+    int width = 100; // Largura suficiente para cobrir o texto antigo
+    int height = 30;
+    uint32_t bg_color = 0x000000FF; // Cor preta para cobrir
+
+    // Apagar área antiga
+    clear_text_area(mlx, x, y, width, height, bg_color);
+
+    // Escrever novo texto
+    char *step_str = ft_itoa(steps);
+	mlx_put_string(mlx, "Moves: ", x, y);
+    mlx_put_string(mlx, step_str, x + 80, y);
+    free(step_str);
 }

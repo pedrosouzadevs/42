@@ -30,7 +30,7 @@ OBJ				=	$(addprefix $(SRC_PATH)/, $(SRC:.c=.o))
 OBJ_BONUS				=	$(addprefix $(SRC_PATH_BONUS)/, $(SRC_BONUS:.c=.o))
 LIB_OBJ			=	$(addprefix $(LIB_PATH)/, $(LIBFT_SRC:.c=.o))
 
-all: libmlx $(NAME) $(NAME_BONUS)
+all: libmlx $(NAME)
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4

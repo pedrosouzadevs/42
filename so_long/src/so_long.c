@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-03 17:38:20 by pdro              #+#    #+#             */
-/*   Updated: 2025-02-03 17:38:20 by pdro             ###   ########.fr       */
+/*   Created: 2025/02/03 17:38:20 by pdro              #+#    #+#             */
+/*   Updated: 2025/02/04 17:28:34 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int argc, char **argv)
 	verify_map(game);
 	find_player_position(game);
 	render_map(game);
+	printf("error\n");
 	mlx_image_to_window(game->mlx, game->player.image, game->player.x,
 		game->player.y);
 	mlx_loop_hook(game->mlx, ft_hook, game);
