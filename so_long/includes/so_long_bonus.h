@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-03 17:28:19 by pdro              #+#    #+#             */
-/*   Updated: 2025-02-03 17:28:19 by pdro             ###   ########.fr       */
+/*   Created: 2025/02/03 17:28:19 by pdro              #+#    #+#             */
+/*   Updated: 2025/02/04 14:31:20 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_game
 }	t_game;
 
 # define TILE_SIZE 50
-# define MOVE_SIZE 1
+# define MOVE_SIZE 5
 # define JUMP_SPEED 25  // Velocidade para subir
 # define GRAVITY 25      // Velocidade para descer
 # define JUMP_HEIGHT 150  // Distância máxima do salto
