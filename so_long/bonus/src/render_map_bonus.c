@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-03 17:36:00 by pdro              #+#    #+#             */
-/*   Updated: 2025-02-03 17:36:00 by pdro             ###   ########.fr       */
+/*   Created: 2025/02/03 17:36:00 by pdro              #+#    #+#             */
+/*   Updated: 2025/02/04 15:11:16 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,8 @@ void	render_map(t_game *game)
 
 void	render_map_wall_floor(t_game *game, int x, int y)
 {
-	if (is_edge_wall(game, x, y))
-	{
-		mlx_image_to_window(game->mlx, game->map.platform_img,
-			x * TILE_SIZE, y * TILE_SIZE);
-	}
-	else
-	{
-		mlx_image_to_window(game->mlx, game->map.wall_img,
-			x * TILE_SIZE, y * TILE_SIZE);
-	}
+	mlx_image_to_window(game->mlx, game->map.wall_img,
+		x * TILE_SIZE, y * TILE_SIZE);
 }
 
 void	render_map_others(t_game *game, int x, int y)

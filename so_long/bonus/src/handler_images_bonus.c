@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_images_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-03 17:36:23 by pdro              #+#    #+#             */
-/*   Updated: 2025-02-03 17:36:23 by pdro             ###   ########.fr       */
+/*   Created: 2025/02/03 17:36:23 by pdro              #+#    #+#             */
+/*   Updated: 2025/02/04 15:17:12 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	init_images(t_game *game)
 	xpm = mlx_load_xpm42("assets/exit/exit1_c.xpm42");
 	game->map.exit_close_img = mlx_texture_to_image(game->mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
-	xpm = mlx_load_xpm42("assets/wall/platform.xpm42");
-	game->map.platform_img = mlx_texture_to_image(game->mlx, &xpm->texture);
+	xpm = mlx_load_xpm42("assets/enemy/vb2.xpm42");
+	game->map.enemy_img = mlx_texture_to_image(game->mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
 	xpm = mlx_load_xpm42("assets/floor/floor.xpm42");
 	game->map.floor_img = mlx_texture_to_image(game->mlx, &xpm->texture);
@@ -44,10 +44,9 @@ void	init_images(t_game *game)
 void	resize_images(t_game *game)
 {
 	mlx_resize_image(game->map.exit_close_img, TILE_SIZE, TILE_SIZE);
-	mlx_resize_image(game->map.platform_img, TILE_SIZE, TILE_SIZE);
+	mlx_resize_image(game->map.enemy_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.exit_open_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.wall_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.floor_img, TILE_SIZE, TILE_SIZE);
-	mlx_resize_image(game->map.platform_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.collectible_img, TILE_SIZE, TILE_SIZE);
 }

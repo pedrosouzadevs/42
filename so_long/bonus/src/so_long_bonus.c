@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-03 17:35:55 by pdro              #+#    #+#             */
-/*   Updated: 2025-02-03 17:35:55 by pdro             ###   ########.fr       */
+/*   Created: 2025/02/03 17:35:55 by pdro              #+#    #+#             */
+/*   Updated: 2025/02/04 16:25:31 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_hook(void *param)
 		mlx_close_window(game->mlx);
 	movement_with_collision(game);
 	calculate_movement(game);
-	refresh_player(game);
+	enemy_move(game);
 	exit_open(game);
 }
 
@@ -47,6 +47,7 @@ int	main(int argc, char **argv)
 	init_images(game);
 	verify_map(game);
 	find_player_position(game);
+	find_enemy_position(game);
 	render_map(game);
 	mlx_image_to_window(game->mlx, game->player.image, game->player.x,
 		game->player.y);

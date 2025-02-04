@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:28:19 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/04 14:31:20 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:24:48 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef struct s_enemy
 	char	south;
 	char	east;
 	char	west;
+	int		dist_up;
+	int		dist_down;
+	int		last_move_time;
 }	t_enemy;
 
 typedef struct s_map
@@ -83,11 +86,10 @@ typedef struct s_map
 	bool	exit_opened;
 	int		enemies;
 	void	*wall_img;
-	void	*platform_img;
 	void	*collectible_img;
 	void	*exit_close_img;
 	void	*exit_open_img;
-	void	*enemy_img;
+	mlx_image_t *enemy_img;
 	void	*floor_img;
 }	t_map;
 
@@ -107,6 +109,8 @@ typedef struct s_game
 # define JUMP_HEIGHT 150  // Distância máxima do salto
 # define JUMP_DISTANCE 50  // Distância máxima do salto
 # define ANIMATION_SPEED 200
+
+static bool g_enemy_moving_up;
 
 void	read_map(char **argv, t_game *game);
 void	exit_error(void);
@@ -140,7 +144,9 @@ void	render_map_wall_floor(t_game *game, int x, int y);
 void	render_map_others(t_game *game, int x, int y);
 void	count_exit_colllectibles_player(t_game *game, int x, int y);
 void	animate_player_evolution(t_game *game);
-
+void	enemy_move(t_game *game);
+void	find_enemy_position(t_game *game);
+void	calculate_distance_enemy_to_wall(t_game *game);
 
 
 #endif
