@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:36:00 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/04 15:11:16 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:07:09 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	render_map(t_game *game)
 	while (game->map.map[y])
 	{
 		x = 0;
-		while (game->map.map[y][x])
+		while (game->map.map[y][x] && (x < game->map.width))
 		{
 			if (game->map.map[y][x] == '1')
 				render_map_wall_floor(game, x, y);
@@ -54,6 +54,6 @@ void	render_map_others(t_game *game, int x, int y)
 		mlx_image_to_window(game->mlx, game->map.collectible_img,
 			x * TILE_SIZE, y * TILE_SIZE);
 	else if (game->map.map[y][x] == 'T')
-		mlx_image_to_window(game->mlx, game->map.enemy_img,
+		mlx_image_to_window(game->mlx, game->enemy.image,
 			x * TILE_SIZE, y * TILE_SIZE);
 }

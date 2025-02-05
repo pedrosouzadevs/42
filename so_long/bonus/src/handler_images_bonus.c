@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:36:23 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/04 15:17:12 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:05:55 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_images(t_game *game)
 	game->map.exit_close_img = mlx_texture_to_image(game->mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
 	xpm = mlx_load_xpm42("assets/enemy/vb2.xpm42");
-	game->map.enemy_img = mlx_texture_to_image(game->mlx, &xpm->texture);
+	game->enemy.image = mlx_texture_to_image(game->mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
 	xpm = mlx_load_xpm42("assets/floor/floor.xpm42");
 	game->map.floor_img = mlx_texture_to_image(game->mlx, &xpm->texture);
@@ -44,7 +44,7 @@ void	init_images(t_game *game)
 void	resize_images(t_game *game)
 {
 	mlx_resize_image(game->map.exit_close_img, TILE_SIZE, TILE_SIZE);
-	mlx_resize_image(game->map.enemy_img, TILE_SIZE, TILE_SIZE);
+	mlx_resize_image(game->enemy.image, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.exit_open_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.wall_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.floor_img, TILE_SIZE, TILE_SIZE);

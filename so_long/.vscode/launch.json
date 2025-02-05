@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/pdro/code/pedrosouzadevs/42/Projetos/so_long",
-      "program": "/home/pdro/code/pedrosouzadevs/42/Projetos/so_long/build/Debug/outDebug",
+      "cwd": "/nfs/homes/pedro-hm/42/projetos/so_long/bonus",
+      "program": "/nfs/homes/pedro-hm/42/projetos/so_long/bonus/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

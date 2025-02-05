@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:28 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/04 17:27:53 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:06:30 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	render_map(t_game *game)
 	while (game->map.map[y])
 	{
 		x = 0;
-		while (game->map.map[y][x])
+		while (game->map.map[y][x] && (x < game->map.width))
 		{
 			if (game->map.map[y][x] == '1')
 				render_map_wall_floor(game, x, y);

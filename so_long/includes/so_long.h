@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:38:44 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/02/04 17:22:12 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:55:30 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,7 @@ void	player_key_move(t_game *game);
 void	render_map_wall_floor(t_game *game, int x, int y);
 void	render_map_others(t_game *game, int x, int y);
 void	count_exit_colllectibles_player(t_game *game, int x, int y);
+void	verify_lines_map(t_game *game);
+
 
 #endif

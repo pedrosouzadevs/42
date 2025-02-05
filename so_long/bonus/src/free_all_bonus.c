@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-03 17:36:27 by pdro              #+#    #+#             */
-/*   Updated: 2025-02-03 17:36:27 by pdro             ###   ########.fr       */
+/*   Created: 2025/02/03 17:36:27 by pdro              #+#    #+#             */
+/*   Updated: 2025/02/05 15:23:03 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ void	free_game_resources(t_game *game)
 {
 	if (game->mlx)
 		mlx_terminate(game->mlx);
+	if (game->map.map)
+	{
+		int	i;
+
+		i = 0;
+		while (game->map.map[i])
+		{
+			free(game->map.map[i]);
+			i++;
+		}
+		free(game->map.map);
+	}
 	free(game);
 }
 

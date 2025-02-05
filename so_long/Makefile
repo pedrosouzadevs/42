@@ -1,6 +1,6 @@
 NAME	:= so_long
 NAME_BONUS	:= so_long_bonus
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -fPIE
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -fPIE -g
 LIBMLX	:= ./MLX42
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include

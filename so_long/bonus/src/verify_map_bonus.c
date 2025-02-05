@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_map_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-03 17:35:49 by pdro              #+#    #+#             */
-/*   Updated: 2025-02-03 17:35:49 by pdro             ###   ########.fr       */
+/*   Created: 2025/02/03 17:35:49 by pdro              #+#    #+#             */
+/*   Updated: 2025/02/05 16:07:44 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	verify_map(t_game *game)
 		printf("Error\nMap must have no more than one exit and one player\n");
 		exit(EXIT_FAILURE);
 	}
+	verify_lines_map(game);
 	is_map_retangle(game);
 }
 
@@ -84,6 +85,25 @@ void	find_player_position(t_game *game)
 				return ;
 			}
 			x++;
+		}
+		y++;
+	}
+}
+void	verify_lines_map(t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (game->map.map[y])
+	{
+		x = 0;
+		while (game->map.map[y][x])
+			x++;
+		if ((x - 1) != game->map.width)
+		{
+			printf("Error\nMap must have the same width in all lines\n");
+			exit(EXIT_FAILURE);
 		}
 		y++;
 	}

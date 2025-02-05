@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:28:19 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/04 17:54:41 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:15:20 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_player
 typedef struct s_enemy
 {
 	void	*image;
+	mlx_image_t	*image_instance;
 	t_animation	animation;
 	int		x;
 	int		y;
@@ -89,8 +90,8 @@ typedef struct s_map
 	void	*collectible_img;
 	void	*exit_close_img;
 	void	*exit_open_img;
-	mlx_image_t *enemy_img;
 	void	*floor_img;
+	void	*square_img;
 }	t_map;
 
 typedef struct s_game
@@ -144,11 +145,7 @@ void	render_map_wall_floor(t_game *game, int x, int y);
 void	render_map_others(t_game *game, int x, int y);
 void	count_exit_colllectibles_player(t_game *game, int x, int y);
 void	animate_player_evolution(t_game *game);
-void	enemy_move(t_game *game);
+void	verify_lines_map(t_game *game);
+// void	is_enemy(t_game *game, int x, int y);
 void	find_enemy_position(t_game *game);
-void	calculate_distance_enemy_to_wall(t_game *game);
-void update_steps_display(mlx_t *mlx, int steps, int x, int y);
-void clear_text_area(mlx_t *mlx, int x, int y, int width, int height, uint32_t bg_color);
-
-
 #endif

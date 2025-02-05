@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:36:14 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/04 16:32:55 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:14:13 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	movement_with_collision(t_game *game)
 		[game->player.x / TILE_SIZE] = '0';
 		render_map(game);
 	}
-	if (game->player.x == game->enemy.x && game->player.y * TILE_SIZE == game->enemy.y * TILE_SIZE)
+	if (game->player.x == game->enemy.x && game->player.y == game->enemy.y)
 	{
 		ft_printf("\nYou lose the game\n");
 		mlx_close_window(game->mlx);
