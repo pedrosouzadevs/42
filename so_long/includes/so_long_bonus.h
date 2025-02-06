@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:28:19 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/05 16:15:20 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:07:30 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_enemy
 typedef struct s_map
 {
 	char	**map;
+	char	**map_route;
 	int		width;
 	int		height;
 	int		player;
@@ -92,6 +93,7 @@ typedef struct s_map
 	void	*exit_open_img;
 	void	*floor_img;
 	void	*square_img;
+	void	*box_img;
 }	t_map;
 
 typedef struct s_game
@@ -148,4 +150,14 @@ void	animate_player_evolution(t_game *game);
 void	verify_lines_map(t_game *game);
 // void	is_enemy(t_game *game, int x, int y);
 void	find_enemy_position(t_game *game);
+void	flood_fill(t_game *game, int x, int y);
+void	is_route_valid(t_game *game);
+void	copy_map(t_game *game);
+void	read_map_route(char **argv, t_game *game);
+void	create_map_route(t_game *game, char *line, int i, int fd);
+void	update_text(t_game *game, char *new_text);
+void	create_box(t_game *game);
+void	update_box(t_game *game);
+
+
 #endif

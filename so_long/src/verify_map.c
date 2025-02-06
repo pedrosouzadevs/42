@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:13 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/05 16:00:02 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:27:17 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,5 @@ void	verify_lines_map(t_game *game)
 		}
 		y++;
 	}
+	is_route_valid(game);
 }

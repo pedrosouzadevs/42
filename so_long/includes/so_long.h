@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:38:44 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/02/05 15:55:30 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:22:32 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_player
 typedef struct s_map
 {
 	char	**map;
+	char	**map_route;
 	int		width;
 	int		height;
 	int		player;
@@ -109,6 +110,10 @@ void	render_map_wall_floor(t_game *game, int x, int y);
 void	render_map_others(t_game *game, int x, int y);
 void	count_exit_colllectibles_player(t_game *game, int x, int y);
 void	verify_lines_map(t_game *game);
-
+void	flood_fill(t_game *game, int x, int y);
+void	is_route_valid(t_game *game);
+void	copy_map(t_game *game);
+void	read_map_route(char **argv, t_game *game);
+void	create_map_route(t_game *game, char *line, int i, int fd);
 
 #endif

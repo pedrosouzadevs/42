@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:36:00 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/05 16:07:09 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:04:12 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	render_map(t_game *game)
 		}
 		y++;
 	}
+	create_box(game);
 }
 
 void	render_map_wall_floor(t_game *game, int x, int y)

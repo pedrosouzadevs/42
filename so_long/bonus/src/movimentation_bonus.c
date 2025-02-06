@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:36:14 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/05 16:14:13 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:07:21 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	calculate_movement(t_game *game)
 	{
 		game->player.dist_traveled = 0;
 		game->player.count++;
-		ft_printf("count: %d\n", game->player.count);
+		// ft_printf("count: %d\n", game->player.count);
+		update_box(game);
 	}
 }
 

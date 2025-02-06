@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 19:06:53 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/05 14:59:50 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:07:13 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void animate_player_evolution(t_game *game)
     int		frame;
 
 	frame = game->player.animation_frame % 3;
-    mlx_delete_image(game->mlx, game->player.image);
+	if (game->player.image)
+	    mlx_delete_image(game->mlx, game->player.image);
 
     if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
@@ -109,9 +110,11 @@ void animate_player_evolution(t_game *game)
         else if (frame == 1)
             xpm = mlx_load_xpm42("assets/player/wb2_b.xpm42");
         else
-            xpm = mlx_load_xpm42("assets/player/wb3_b.xpm42"); // Imagem estática
+            xpm = mlx_load_xpm42("assets/player/wb3_b.xpm42");
     }
 
+	if (!xpm)
+		printf("Error loading xpm\n");
     game->player.image = mlx_texture_to_image(game->mlx, &xpm->texture);
     mlx_resize_image(game->player.image, TILE_SIZE, TILE_SIZE);
     mlx_image_to_window(game->mlx, game->player.image, game->player.x, game->player.y);

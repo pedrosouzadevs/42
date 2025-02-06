@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:20 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/05 14:20:53 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:25:27 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 	}
 	game = (t_game *)malloc(sizeof(t_game));
 	read_map(argv, game);
+	read_map_route(argv, game);
 	if (!game->map.map)
 		error_readeble_map();
 	game->mlx = mlx_init((game->map.width * TILE_SIZE),
@@ -46,7 +47,6 @@ int	main(int argc, char **argv)
 			(game->map.height * TILE_SIZE));
 	init_images(game);
 	verify_map(game);
-	find_player_position(game);
 	render_map(game);
 	mlx_image_to_window(game->mlx, game->player.image, game->player.x,
 		game->player.y);
