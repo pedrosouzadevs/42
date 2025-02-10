@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:54:17 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/02/06 15:48:49 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:53:58 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	is_route_valid(t_game *game)
 	int	j;
 
 	find_player_position(game);
+	game->player.animation_frame = 0;
 	flood_fill(game, game->player.x / TILE_SIZE, game->player.y / TILE_SIZE);
 	i = 0;
 	while (game->map.map_route[i])

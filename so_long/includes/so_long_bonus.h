@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:28:19 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/06 17:07:30 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:03:22 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ typedef struct s_game
 }	t_game;
 
 # define TILE_SIZE 50
-# define MOVE_SIZE 2
+# define MOVE_SIZE 5
 # define JUMP_SPEED 25  // Velocidade para subir
 # define GRAVITY 25      // Velocidade para descer
 # define JUMP_HEIGHT 150  // Distância máxima do salto
@@ -157,5 +157,14 @@ void	update_text(t_game *game, char *new_text);
 void	create_box(t_game *game);
 void	update_box(t_game *game);
 void	put_player_enemy_in_map(t_game *game);
+void	update_box_text(t_game *game);
+void	init_evol_d(t_game *game, int frame);
+void	init_evol_s(t_game *game, int frame);
+void	init_evol_a(t_game *game, int frame);
+void	init_evol_w(t_game *game, int frame);
+void	init_animation_w(t_game *game, int frame);
+void	init_animation_s(t_game *game, int frame);
+void	init_animation_d(t_game *game, int frame);
+void	init_animation_a(t_game *game, int frame);
 
 #endif

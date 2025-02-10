@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:36:27 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/06 15:44:46 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:16:39 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	free_game_resources(t_game *game)
 {
 	int	i;
 
-	if (game->mlx)
-		mlx_terminate(game->mlx);
 	if (game->map.map)
 	{
 		i = 0;
@@ -32,6 +30,8 @@ void	free_game_resources(t_game *game)
 			free(game->map.map_route[i++]);
 		free(game->map.map_route);
 	}
+	if (game->mlx)
+		mlx_terminate(game->mlx);
 	free(game);
 }
 

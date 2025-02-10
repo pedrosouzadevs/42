@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:36:14 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/06 17:07:21 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:08:02 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	movement_with_collision(t_game *game)
 		[game->player.x / TILE_SIZE] = '0';
 		render_map(game);
 	}
-	if (is_enemy(game, game->player.x, game->player.y) ||
-		game->map.map[game->player.y / TILE_SIZE]
+	if (is_enemy(game, game->player.x, game->player.y)
+		|| game->map.map[game->player.y / TILE_SIZE]
 		[game->player.x / TILE_SIZE] == 'T')
 	{
 		ft_printf("\nYou lose the game\n");

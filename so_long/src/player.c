@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:34 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/04 17:18:47 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:13:44 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	refresh_player(t_game *game)
 		mlx_image_to_window(game->mlx, game->player.image,
 			game->player.x, game->player.y);
 	}
+	mlx_delete_xpm42(xpm);
 }
 
 void	exit_open(t_game *game)

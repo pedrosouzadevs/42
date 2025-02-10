@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:03:18 by pedro-hm          #+#    #+#             */
-/*   Updated: 2024/10/15 16:52:20 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:56:09 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	ft_count_nbr(int n)
 	int	wres;
 
 	count = 0;
+	wres = 0;
 	wres = n;
 	if (n == 0)
 		count = 1;

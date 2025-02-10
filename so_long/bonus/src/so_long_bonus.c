@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:35:55 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/06 17:04:00 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:30:11 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	put_player_enemy_in_map(t_game *game)
 	find_enemy_position(game);
 	mlx_image_to_window(game->mlx, game->player.image, game->player.x,
 		game->player.y);
-	mlx_image_to_window(game->mlx, game->enemy.image,
-		game->enemy.x * TILE_SIZE, game->enemy.y * TILE_SIZE);
+	if (game->enemy.x != 0 && game->enemy.y != 0)
+		mlx_image_to_window(game->mlx, game->enemy.image,
+			game->enemy.x * TILE_SIZE, game->enemy.y * TILE_SIZE);
 }
