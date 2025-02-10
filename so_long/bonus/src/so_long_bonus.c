@@ -48,8 +48,7 @@ int	main(int argc, char **argv)
 	init_images(game);
 	verify_map(game);
 	render_map(game);
-	mlx_image_to_window(game->mlx, game->player.image, game->player.x,
-		game->player.y);
+	put_player_enemy_in_map(game);
 	mlx_loop_hook(game->mlx, ft_hook, game);
 	mlx_loop(game->mlx);
 	free_game_resources(game);
@@ -60,4 +59,13 @@ int	error_readeble_map(void)
 {
 	ft_printf("Error: map is not readeble\n");
 	return (EXIT_FAILURE);
+}
+
+void	put_player_enemy_in_map(t_game *game)
+{
+	find_enemy_position(game);
+	mlx_image_to_window(game->mlx, game->player.image, game->player.x,
+		game->player.y);
+	mlx_image_to_window(game->mlx, game->enemy.image,
+		game->enemy.x * TILE_SIZE, game->enemy.y * TILE_SIZE);
 }

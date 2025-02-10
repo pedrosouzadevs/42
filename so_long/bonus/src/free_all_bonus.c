@@ -20,7 +20,6 @@ void	free_game_resources(t_game *game)
 		mlx_terminate(game->mlx);
 	if (game->map.map)
 	{
-
 		i = 0;
 		while (game->map.map[i])
 			free(game->map.map[i++]);

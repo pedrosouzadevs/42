@@ -14,7 +14,10 @@
 
 void	flood_fill(t_game *game, int x, int y)
 {
-	if (game->map.map_route[y][x] == '0' || game->map.map_route[y][x] == 'C' || game->map.map_route[y][x] == 'E' || game->map.map_route[y][x] == 'P')
+	if (game->map.map_route[y][x] == '0' ||
+		game->map.map_route[y][x] == 'C' ||
+		game->map.map_route[y][x] == 'E' ||
+		game->map.map_route[y][x] == 'P')
 	{
 		game->map.map_route[y][x] = 'V';
 		flood_fill(game, x + 1, y);
@@ -38,7 +41,8 @@ void	is_route_valid(t_game *game)
 		while (game->map.map_route[i][j])
 		{
 			printf("%c", game->map.map_route[i][j]);
-			if (game->map.map_route[i][j] == 'E' || game->map.map_route[i][j] == 'C')
+			if (game->map.map_route[i][j] == 'E' ||
+				game->map.map_route[i][j] == 'C')
 			{
 				ft_printf("Error\nInvalid route\n");
 				exit(EXIT_FAILURE);

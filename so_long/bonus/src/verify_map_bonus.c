@@ -62,6 +62,8 @@ void	count_exit_colllectibles_player(t_game *game, int x, int y)
 		game->map.collectibles++;
 	if (game->map.map[y][x] == 'P')
 		game->map.player++;
+	if (game->map.map[y][x] == 'T')
+		game->map.enemies++;
 	if (is_edge_wall(game, x, y))
 		error_wall();
 }
@@ -72,7 +74,6 @@ void	find_player_position(t_game *game)
 	int	x;
 
 	y = 0;
-	game->player.last_animation_time = mlx_get_time();
 	while (game->map.map[y])
 	{
 		x = 0;
@@ -89,6 +90,7 @@ void	find_player_position(t_game *game)
 		y++;
 	}
 }
+
 void	verify_lines_map(t_game *game)
 {
 	int	y;

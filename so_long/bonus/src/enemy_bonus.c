@@ -27,8 +27,6 @@ void	find_enemy_position(t_game *game)
 			{
 				game->enemy.x = x;
 				game->enemy.y = y;
-				game->map.map[y][x] = '0';
-				game->map.enemies++;
 			}
 			x++;
 		}
@@ -36,19 +34,35 @@ void	find_enemy_position(t_game *game)
 	}
 }
 
-// void	is_enemy(t_game *game, int x, int y)
-// {
-// 	int	enemy_x1;
-// 	int	enemy_y1;
-// 	int	enemy_x2;
-// 	int	enemy_y2;
+int	is_enemy(t_game *game, int x, int y)
+{
+	int	enemy_x1;
+	int	enemy_y1;
+	int	enemy_x2;
+	int	enemy_y2;
 
-// 	enemy_x1 = x / TILE_SIZE;
-// 	enemy_y1 = y / TILE_SIZE;
-// 	enemy_x2 = (x + TILE_SIZE - 1) / TILE_SIZE;
-// 	enemy_y2 = (y + TILE_SIZE - 1) / TILE_SIZE;
-// 	return (game->map.map[enemy_y1][enemy_x1] == 'T' ||
-// 			game->map.map[enemy_y1][enemy_x2] == 'T' ||
-// 			game->map.map[enemy_y2][enemy_x1] == 'T' ||
-// 			game->map.map[enemy_y2][enemy_x2] == 'T');
+	enemy_x1 = x / TILE_SIZE;
+	enemy_y1 = y / TILE_SIZE;
+	enemy_x2 = (x + TILE_SIZE - 1) / TILE_SIZE;
+	enemy_y2 = (y + TILE_SIZE - 1) / TILE_SIZE;
+	return (game->map.map[enemy_y1][enemy_x1] == 'T' ||
+			game->map.map[enemy_y1][enemy_x2] == 'T' ||
+			game->map.map[enemy_y2][enemy_x1] == 'T' ||
+			game->map.map[enemy_y2][enemy_x2] == 'T');
+}
+// int	is_collectable(t_game *game, int x, int y)
+// {
+// 	int	collectable_x1;
+// 	int	collectable_y1;
+// 	int	collectable_x2;
+// 	int	collectable_y2;
+
+// 	collectable_x1 = x / TILE_SIZE;
+// 	collectable_y1 = y / TILE_SIZE;
+// 	collectable_x2 = (x + TILE_SIZE - 1) / TILE_SIZE;
+// 	collectable_y2 = (y + TILE_SIZE - 1) / TILE_SIZE;
+// 	return (game->map.map[collectable_y1][collectable_x1] == 'C' ||
+// 			game->map.map[collectable_y1][collectable_x2] == 'C' ||
+// 			game->map.map[collectable_y2][collectable_x1] == 'C' ||
+// 			game->map.map[collectable_y2][collectable_x2] == 'C');
 // }

@@ -38,40 +38,40 @@ typedef struct s_animation
 
 typedef struct s_player
 {
-	void	*image;
+	void		*image;
 	t_animation	animation;
 	t_animation	animation2;
-	int		x;
-	int		y;
-	int		prev_x;
-	int		prev_y;
-	int		dist_traveled;
-	int		count;
-	char	north;
-	char	south;
-	char	east;
-	char	west;
-	int		collected;
-	int		animation_frame;
-	int		last_animation_time;
+	int			x;
+	int			y;
+	int			prev_x;
+	int			prev_y;
+	int			dist_traveled;
+	int			count;
+	char		north;
+	char		south;
+	char		east;
+	char		west;
+	int			collected;
+	int			animation_frame;
+	int			last_animation_time;
 }	t_player;
 
 typedef struct s_enemy
 {
-	void	*image;
+	void		*image;
 	mlx_image_t	*image_instance;
 	t_animation	animation;
-	int		x;
-	int		y;
-	int		prev_x;
-	int		prev_y;
-	char	north;
-	char	south;
-	char	east;
-	char	west;
-	int		dist_up;
-	int		dist_down;
-	int		last_move_time;
+	int			x;
+	int			y;
+	int			prev_x;
+	int			prev_y;
+	char		north;
+	char		south;
+	char		east;
+	char		west;
+	int			dist_up;
+	int			dist_down;
+	int			last_move_time;
 }	t_enemy;
 
 typedef struct s_map
@@ -106,14 +106,12 @@ typedef struct s_game
 }	t_game;
 
 # define TILE_SIZE 50
-# define MOVE_SIZE 5
+# define MOVE_SIZE 2
 # define JUMP_SPEED 25  // Velocidade para subir
 # define GRAVITY 25      // Velocidade para descer
 # define JUMP_HEIGHT 150  // Distância máxima do salto
 # define JUMP_DISTANCE 50  // Distância máxima do salto
 # define ANIMATION_SPEED 200
-
-static bool g_enemy_moving_up;
 
 void	read_map(char **argv, t_game *game);
 void	exit_error(void);
@@ -140,7 +138,7 @@ void	init_walls(t_game *game);
 void	resize_images(t_game *game);
 void	create_map(t_game *game, char *line, int i, int fd);
 void	map_is_not_ber(char **argv);
-void 	animate_player(t_game *game);
+void	animate_player(t_game *game);
 int		error_readeble_map(void);
 void	player_key_move(t_game *game);
 void	render_map_wall_floor(t_game *game, int x, int y);
@@ -148,7 +146,7 @@ void	render_map_others(t_game *game, int x, int y);
 void	count_exit_colllectibles_player(t_game *game, int x, int y);
 void	animate_player_evolution(t_game *game);
 void	verify_lines_map(t_game *game);
-// void	is_enemy(t_game *game, int x, int y);
+int		is_enemy(t_game *game, int x, int y);
 void	find_enemy_position(t_game *game);
 void	flood_fill(t_game *game, int x, int y);
 void	is_route_valid(t_game *game);
@@ -158,6 +156,6 @@ void	create_map_route(t_game *game, char *line, int i, int fd);
 void	update_text(t_game *game, char *new_text);
 void	create_box(t_game *game);
 void	update_box(t_game *game);
-
+void	put_player_enemy_in_map(t_game *game);
 
 #endif

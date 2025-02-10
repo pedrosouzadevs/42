@@ -55,6 +55,8 @@ void	render_map_others(t_game *game, int x, int y)
 		mlx_image_to_window(game->mlx, game->map.collectible_img,
 			x * TILE_SIZE, y * TILE_SIZE);
 	else if (game->map.map[y][x] == 'T')
+	{
 		mlx_image_to_window(game->mlx, game->enemy.image,
 			x * TILE_SIZE, y * TILE_SIZE);
+	}
 }

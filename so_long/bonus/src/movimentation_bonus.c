@@ -41,7 +41,6 @@ void	calculate_movement(t_game *game)
 	{
 		game->player.dist_traveled = 0;
 		game->player.count++;
-		// ft_printf("count: %d\n", game->player.count);
 		update_box(game);
 	}
 }
@@ -49,8 +48,8 @@ void	calculate_movement(t_game *game)
 void	movement_with_collision(t_game *game)
 {
 	next_tile(game);
-	if (game->map.exit_opened && game->player.x == game->map.exit_x * TILE_SIZE
-		&& game->player.y == game->map.exit_y * TILE_SIZE)
+	if (game->map.exit_opened && game->map.map[game->player.y / TILE_SIZE]
+		[game->player.x / TILE_SIZE] == 'E')
 	{
 		ft_printf("\nYou win the game\n");
 		mlx_close_window(game->mlx);
@@ -63,7 +62,9 @@ void	movement_with_collision(t_game *game)
 		[game->player.x / TILE_SIZE] = '0';
 		render_map(game);
 	}
-	if (game->player.x == game->enemy.x && game->player.y == game->enemy.y)
+	if (is_enemy(game, game->player.x, game->player.y) ||
+		game->map.map[game->player.y / TILE_SIZE]
+		[game->player.x / TILE_SIZE] == 'T')
 	{
 		ft_printf("\nYou lose the game\n");
 		mlx_close_window(game->mlx);
