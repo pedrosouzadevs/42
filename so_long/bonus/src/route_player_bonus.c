@@ -14,7 +14,11 @@
 
 void	flood_fill(t_game *game, int x, int y)
 {
-	if (game->map.map_route[y][x] == '0' || game->map.map_route[y][x] == 'C' || game->map.map_route[y][x] == 'E' || game->map.map_route[y][x] == 'P')
+	if (game->map.map_route[y][x] == '0' ||
+		game->map.map_route[y][x] == 'C' ||
+		game->map.map_route[y][x] == 'E' ||
+		game->map.map_route[y][x] == 'P' ||
+		game->map.map_route[y][x] == 'T')
 	{
 		game->map.map_route[y][x] = 'V';
 		flood_fill(game, x + 1, y);
@@ -30,7 +34,6 @@ void	is_route_valid(t_game *game)
 	int	j;
 
 	find_player_position(game);
-	find_enemy_position(game);
 	flood_fill(game, game->player.x / TILE_SIZE, game->player.y / TILE_SIZE);
 	i = 0;
 	while (game->map.map_route[i])
@@ -38,8 +41,8 @@ void	is_route_valid(t_game *game)
 		j = 0;
 		while (game->map.map_route[i][j])
 		{
-			printf("%c", game->map.map_route[i][j]);
-			if (game->map.map_route[i][j] == 'E' || game->map.map_route[i][j] == 'C')
+			if (game->map.map_route[i][j] == 'E' ||
+				game->map.map_route[i][j] == 'C')
 			{
 				ft_printf("Error\nInvalid route\n");
 				exit(EXIT_FAILURE);

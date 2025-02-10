@@ -59,6 +59,8 @@
   "files.associations": {
     "*.embeddedhtml": "html",
     "so_long.h": "c",
-    "so_long_bonus.h": "c"
+    "so_long_bonus.h": "c",
+    "*.tcc": "c",
+    "limits": "c"
   }
 }

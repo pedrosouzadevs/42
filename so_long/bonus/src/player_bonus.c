@@ -31,6 +31,7 @@ void	refresh_player(t_game *game)
 			game->player.x, game->player.y);
 	}
 }
+
 void	exit_open(t_game *game)
 {
 	if (game->player.collected == game->map.collectibles)

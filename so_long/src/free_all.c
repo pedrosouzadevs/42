@@ -14,12 +14,12 @@
 
 void	free_game_resources(t_game *game)
 {
+	int	i;
+
 	if (game->mlx)
 		mlx_terminate(game->mlx);
 	if (game->map.map)
 	{
-		int	i;
-
 		i = 0;
 		while (game->map.map[i])
 		{

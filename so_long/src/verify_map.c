@@ -44,7 +44,7 @@ void	verify_map(t_game *game)
 	}
 	if (game->map.exit == 0 || game->map.collectibles == 0
 		|| game->map.player == 0)
-			error_none_player_exit_colec();
+		error_none_player_exit_colec();
 	if (game->map.exit > 1 || game->map.player > 1)
 	{
 		printf("Error\nMap must have no more than one exit and one player\n");
