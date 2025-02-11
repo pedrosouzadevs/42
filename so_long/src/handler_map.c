@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:45 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/06 15:18:42 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:18:18 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	map_is_not_ber(char **argv)
 {
 	if (ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])) == NULL)
 	{
-		printf("Error\nMap has to be .ber\n");
+		ft_printf("Error\nMap has to be .ber\n");
 		exit(EXIT_FAILURE);
 	}
 }

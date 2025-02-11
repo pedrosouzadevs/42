@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:54:17 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/02/06 15:34:14 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:33:38 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	is_route_valid(t_game *game)
 		j = 0;
 		while (game->map.map_route[i][j])
 		{
-			printf("%c", game->map.map_route[i][j]);
 			if (game->map.map_route[i][j] == 'E' ||
 				game->map.map_route[i][j] == 'C')
 			{

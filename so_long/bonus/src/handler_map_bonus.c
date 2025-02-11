@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_map_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdro <pdro@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-03 17:36:18 by pdro              #+#    #+#             */
-/*   Updated: 2025-02-03 17:36:18 by pdro             ###   ########.fr       */
+/*   Created: 2025/02/03 17:36:18 by pdro              #+#    #+#             */
+/*   Updated: 2025/02/11 16:18:49 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	map_is_not_ber(char **argv)
 {
 	if (ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])) == NULL)
 	{
-		printf("Error\nMap has to be .ber\n");
+		ft_printf("Error\nMap has to be .ber\n");
 		exit(EXIT_FAILURE);
 	}
 }

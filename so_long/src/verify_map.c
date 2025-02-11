@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:13 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/06 15:27:17 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:18:24 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	verify_map(t_game *game)
 		error_none_player_exit_colec();
 	if (game->map.exit > 1 || game->map.player > 1)
 	{
-		printf("Error\nMap must have no more than one exit and one player\n");
+		ft_printf("Error\nMap must have no more than one exit and one player\n");
 		exit(EXIT_FAILURE);
 	}
 	verify_lines_map(game);
@@ -102,7 +102,7 @@ void	verify_lines_map(t_game *game)
 			x++;
 		if ((x - 1) != game->map.width)
 		{
-			printf("Error\nMap must have the same width in all lines\n");
+			ft_printf("Error\nMap must have the same width in all lines\n");
 			exit(EXIT_FAILURE);
 		}
 		y++;
