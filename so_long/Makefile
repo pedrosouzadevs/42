@@ -7,7 +7,8 @@ HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIB_PATH		=	./libs/libft
 SRC = free_all.c handler_map.c render_map.c so_long.c player.c \
-			handler_images.c movimentation.c verify_map.c route_player.c
+			handler_images.c movimentation.c verify_map.c route_player.c \
+			handle_errors.c
 SRC_PATH = ./src
 SRC_BONUS = free_all_bonus.c handler_map_bonus.c render_map_bonus.c so_long_bonus.c player_bonus.c \
 			handler_images_bonus.c movimentation_bonus.c verify_map_bonus.c \

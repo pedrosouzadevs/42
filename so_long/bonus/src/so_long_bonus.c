@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:35:55 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/10 16:30:11 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:54:55 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ int	main(int argc, char **argv)
 		ft_printf("Use .so_long map.ber\n");
 		return (EXIT_FAILURE);
 	}
-	game = (t_game *)malloc(sizeof(t_game));
+	game = (t_game *)ft_calloc(1, sizeof(t_game));
 	read_map(argv, game);
 	read_map_route(argv, game);
-	if (!game->map.map)
-		error_readeble_map();
 	game->mlx = mlx_init((game->map.width * TILE_SIZE),
 			(game->map.height * TILE_SIZE), "So_long", true);
 	game->window = mlx_new_image(game->mlx, (game->map.width * TILE_SIZE),

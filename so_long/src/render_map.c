@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:28 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/05 16:06:30 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:37:57 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,5 @@ void	render_map_others(t_game *game, int x, int y)
 	}
 	else if (game->map.map[y][x] == 'C')
 		mlx_image_to_window(game->mlx, game->map.collectible_img,
-			x * TILE_SIZE, y * TILE_SIZE);
-	else if (game->map.map[y][x] == 'T')
-		mlx_image_to_window(game->mlx, game->map.enemy_img,
 			x * TILE_SIZE, y * TILE_SIZE);
 }

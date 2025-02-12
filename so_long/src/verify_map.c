@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:13 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/11 16:18:24 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:11:55 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,9 @@ void	verify_map(t_game *game)
 	}
 	if (game->map.exit == 0 || game->map.collectibles == 0
 		|| game->map.player == 0)
-		error_none_player_exit_colec();
+		error_none_player_exit_colec(game);
 	if (game->map.exit > 1 || game->map.player > 1)
-	{
-		ft_printf("Error\nMap must have no more than one exit and one player\n");
-		exit(EXIT_FAILURE);
-	}
+		error_more_player_exit(game);
 	verify_lines_map(game);
 	is_map_retangle(game);
 }
@@ -63,7 +60,7 @@ void	count_exit_colllectibles_player(t_game *game, int x, int y)
 	if (game->map.map[y][x] == 'P')
 		game->map.player++;
 	if (is_edge_wall(game, x, y))
-		error_wall();
+		error_wall(game);
 }
 
 void	find_player_position(t_game *game)
@@ -101,10 +98,7 @@ void	verify_lines_map(t_game *game)
 		while (game->map.map[y][x])
 			x++;
 		if ((x - 1) != game->map.width)
-		{
-			ft_printf("Error\nMap must have the same width in all lines\n");
-			exit(EXIT_FAILURE);
-		}
+			error_width_map(game);
 		y++;
 	}
 	is_route_valid(game);

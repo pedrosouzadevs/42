@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:38:44 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/02/06 15:22:32 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:29:43 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,16 @@ typedef struct s_game
 # define JUMP_DISTANCE 50  // Distância máxima do salto
 
 void	read_map(char **argv, t_game *game);
-void	exit_error(void);
-int		ft_count_lines(int fd);
+void	exit_error(t_game *game);
+int		ft_count_lines(int fd, t_game *game);
 void	init_images(t_game *game);
 void	render_map(t_game *game);
 int		ft_line_length(int fd);
 void	free_game_resources(t_game *game);
 void	verify_map(t_game *game);
 void	find_player_position(t_game *game);
-void	error_wall(void);
-void	error_none_player_exit_colec(void);
+void	error_wall(t_game *game);
+void	error_none_player_exit_colec(t_game *game);
 int		is_edge_wall(t_game *game, int x, int y);
 void	is_map_retangle(t_game *game);
 void	refresh_map(t_game *game);
@@ -103,8 +103,7 @@ void	init_walls_coners(t_game *game);
 void	init_walls(t_game *game);
 void	resize_images(t_game *game);
 void	create_map(t_game *game, char *line, int i, int fd);
-void	map_is_not_ber(char **argv);
-int		error_readeble_map(void);
+void	map_is_not_ber(char **argv, t_game *game);
 void	player_key_move(t_game *game);
 void	render_map_wall_floor(t_game *game, int x, int y);
 void	render_map_others(t_game *game, int x, int y);
@@ -115,5 +114,10 @@ void	is_route_valid(t_game *game);
 void	copy_map(t_game *game);
 void	read_map_route(char **argv, t_game *game);
 void	create_map_route(t_game *game, char *line, int i, int fd);
+void	error_width_map(t_game *game);
+void	error_more_player_exit(t_game *game);
+void	free_images(t_game *game);
+void	error_map_route(t_game *game);
+void	error_route_is_not_valid(t_game *game);
 
 #endif

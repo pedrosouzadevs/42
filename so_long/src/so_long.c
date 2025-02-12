@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:20 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/06 15:25:27 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:27:31 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf("Use .so_long map.ber\n");
-		return (EXIT_FAILURE);
+		ft_printf("Usage: %s <map_file>\n", argv[0]);
+		return (1);
 	}
-	game = (t_game *)malloc(sizeof(t_game));
+	game = (t_game *)ft_calloc(1, sizeof(t_game));
 	read_map(argv, game);
 	read_map_route(argv, game);
-	if (!game->map.map)
-		error_readeble_map();
 	game->mlx = mlx_init((game->map.width * TILE_SIZE),
 			(game->map.height * TILE_SIZE), "So_long", true);
 	game->window = mlx_new_image(game->mlx, (game->map.width * TILE_SIZE),
@@ -56,8 +54,3 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-int	error_readeble_map(void)
-{
-	ft_printf("Error: map is not readeble\n");
-	return (EXIT_FAILURE);
-}
