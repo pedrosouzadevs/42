@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:36:23 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/11 16:40:49 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:50:51 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,7 @@ void	resize_images(t_game *game)
 	mlx_resize_image(game->map.wall_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.floor_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.collectible_img, TILE_SIZE, TILE_SIZE);
-	game->map.exit = 0;
-	game->map.collectibles = 0;
-	game->map.enemies = 0;
-	game->map.player = 0;
-	game->player.collected = 0;
-	game->player.dist_traveled = 0;
 	texture = mlx_load_png("assets/enemy/vb3(2).png");
-	if (!texture)
-		printf("Error loading enemy texture");
 	game->enemy.image = mlx_texture_to_image(game->mlx, texture);
 	mlx_delete_texture(texture);
 	mlx_resize_image(game->enemy.image, TILE_SIZE, TILE_SIZE);

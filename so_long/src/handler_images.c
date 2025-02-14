@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:51 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/12 17:27:31 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:48:00 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,4 @@ void	resize_images(t_game *game)
 	mlx_resize_image(game->map.wall_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.floor_img, TILE_SIZE, TILE_SIZE);
 	mlx_resize_image(game->map.collectible_img, TILE_SIZE, TILE_SIZE);
-	// game->map.exit = 0;
-	// game->map.collectibles = 0;
-	// game->map.enemies = 0;
-	// game->map.player = 0;
-	// game->player.collected = 0;
-	// game->player.dist_traveled = 0;
 }

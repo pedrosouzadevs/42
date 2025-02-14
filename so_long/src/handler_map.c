@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:45 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/12 16:58:33 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:33:34 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,16 @@ void	read_map(char **argv, t_game *game)
 
 	i = 0;
 	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		ft_printf("Error\nInvalid map_path/map\n");
+		free_game_resources(game);
+		exit(EXIT_FAILURE);
+	}
 	game->map.width = ft_line_length(fd);
 	line_count = ft_count_lines(fd, game);
 	game->map.height = line_count;
 	game->map.map = malloc(sizeof(char *) * (line_count + 1));
-
 	close(fd);
 	fd = open(argv[1], O_RDONLY);
 	map_is_not_ber(argv, game);

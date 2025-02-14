@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:36:18 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/11 16:18:49 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:35:26 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,36 @@ void	read_map(char **argv, t_game *game)
 
 	i = 0;
 	fd = open(argv[1], O_RDONLY);
-	game->map.width = ft_line_length(fd);
-	line_count = ft_count_lines(fd);
-	game->map.height = line_count;
-	game->map.map = malloc(sizeof(char *) * (line_count + 1));
-	if (!game->map.map)
+	if (fd == -1)
 	{
-		perror("Error\nInvalid map_path/map\n");
+		ft_printf("Error\nInvalid map_path/map\n");
+		free_game_resources(game);
 		exit(EXIT_FAILURE);
 	}
+	game->map.width = ft_line_length(fd);
+	line_count = ft_count_lines(fd, game);
+	game->map.height = line_count;
+	game->map.map = malloc(sizeof(char *) * (line_count + 1));
 	close(fd);
 	fd = open(argv[1], O_RDONLY);
-	map_is_not_ber(argv);
+	map_is_not_ber(argv, game);
 	line = NULL;
 	create_map(game, line, i, fd);
 	close(fd);
 }
 
-void	map_is_not_ber(char **argv)
+void	map_is_not_ber(char **argv, t_game *game)
 {
+	if (!game->map.map)
+	{
+		perror("Error\nInvalid map_path/map\n");
+		free_game_resources(game);
+		exit(EXIT_FAILURE);
+	}
 	if (ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])) == NULL)
 	{
 		ft_printf("Error\nMap has to be .ber\n");
+		free_game_resources(game);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -60,7 +68,7 @@ void	create_map(t_game *game, char *line, int i, int fd)
 	game->map.map[i] = NULL;
 }
 
-int	ft_count_lines(int fd)
+int	ft_count_lines(int fd, t_game *game)
 {
 	char	*line;
 	int		linecount;
@@ -74,7 +82,9 @@ int	ft_count_lines(int fd)
 		if (ft_strlen(line) == 1 && *line != '\n')
 		{
 			free(line);
-			exit_error();
+			ft_printf("Error\nThere is no map in the file\n");
+			free_game_resources(game);
+			exit_error(game);
 		}
 		else
 		{

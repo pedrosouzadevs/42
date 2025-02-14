@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:54:17 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/02/10 16:53:58 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:35:43 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ void	is_route_valid(t_game *game)
 		{
 			if (game->map.map_route[i][j] == 'E' ||
 				game->map.map_route[i][j] == 'C')
-			{
-				ft_printf("Error\nInvalid route\n");
-				exit(EXIT_FAILURE);
-			}
+				error_route_is_not_valid(game);
 			j++;
 		}
 		i++;
@@ -61,13 +58,15 @@ void	read_map_route(char **argv, t_game *game)
 	int		i;
 
 	i = 0;
-	fd = 0;
-	game->map.map_route = malloc(sizeof(char *) * (game->map.height + 1));
-	if (!game->map.map_route)
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
 	{
-		perror("Error\nInvalid map_path/map\n");
+		ft_printf("Error\nInvalid map_path/map\n");
+		free_game_resources(game);
 		exit(EXIT_FAILURE);
 	}
+	game->map.map_route = malloc(sizeof(char *) * (game->map.height + 1));
+	error_map_route(game);
 	close(fd);
 	fd = open(argv[1], O_RDONLY);
 	line = NULL;
@@ -86,4 +85,11 @@ void	create_map_route(t_game *game, char *line, int i, int fd)
 			break ;
 	}
 	game->map.map_route[i] = NULL;
+}
+
+void	error_route_is_not_valid(t_game *game)
+{
+	ft_printf("Error\nMap route is not valid\n");
+	free_game_resources(game);
+	exit(EXIT_FAILURE);
 }

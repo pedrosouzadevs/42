@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 19:08:37 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/05 16:14:38 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:50:26 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,3 @@ int	is_enemy(t_game *game, int x, int y)
 			game->map.map[enemy_y2][enemy_x1] == 'T' ||
 			game->map.map[enemy_y2][enemy_x2] == 'T');
 }
-// int	is_collectable(t_game *game, int x, int y)
-// {
-// 	int	collectable_x1;
-// 	int	collectable_y1;
-// 	int	collectable_x2;
-// 	int	collectable_y2;
-
-// 	collectable_x1 = x / TILE_SIZE;
-// 	collectable_y1 = y / TILE_SIZE;
-// 	collectable_x2 = (x + TILE_SIZE - 1) / TILE_SIZE;
-// 	collectable_y2 = (y + TILE_SIZE - 1) / TILE_SIZE;
-// 	return (game->map.map[collectable_y1][collectable_x1] == 'C' ||
-// 			game->map.map[collectable_y1][collectable_x2] == 'C' ||
-// 			game->map.map[collectable_y2][collectable_x1] == 'C' ||
-// 			game->map.map[collectable_y2][collectable_x2] == 'C');
-// }

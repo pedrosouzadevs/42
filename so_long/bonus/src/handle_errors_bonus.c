@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_errors.c                                    :+:      :+:    :+:   */
+/*   handle_errors_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 16:06:45 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/02/14 18:24:47 by pedro-hm         ###   ########.fr       */
+/*   Created: 2025/02/14 17:47:22 by pedro-hm          #+#    #+#             */
+/*   Updated: 2025/02/14 18:34:30 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 void	error_width_map(t_game *game)
 {

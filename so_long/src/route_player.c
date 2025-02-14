@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:54:17 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/02/12 17:30:30 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:33:44 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,13 @@ void	read_map_route(char **argv, t_game *game)
 	int		i;
 
 	i = 0;
-	fd = 0;
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		ft_printf("Error\nInvalid map_path/map\n");
+		free_game_resources(game);
+		exit(EXIT_FAILURE);
+	}
 	game->map.map_route = malloc(sizeof(char *) * (game->map.height + 1));
 	error_map_route(game);
 	close(fd);

@@ -13,7 +13,7 @@ SRC_PATH = ./src
 SRC_BONUS = free_all_bonus.c handler_map_bonus.c render_map_bonus.c so_long_bonus.c player_bonus.c \
 			handler_images_bonus.c movimentation_bonus.c verify_map_bonus.c \
 			animation_bonus.c enemy_bonus.c route_player_bonus.c box_with_count_bonus.c \
-			init_animation.c init_animation_evol.c
+			init_animation.c init_animation_evol.c handle_errors_bonus.c
 SRC_PATH_BONUS = ./bonus/src
 
 LIBFT_SRC		=	ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_strlen.c ft_isascii.c \

@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:38:20 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/12 17:27:31 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:29:01 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,3 @@ int	main(int argc, char **argv)
 	free_game_resources(game);
 	return (0);
 }
-

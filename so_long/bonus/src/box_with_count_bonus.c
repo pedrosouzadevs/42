@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:09:55 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/02/10 18:22:37 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:48:25 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,8 @@ void	create_box(t_game *game)
 	if (game->map.box_img)
 		mlx_delete_image(game->mlx, game->map.box_img);
 	xpm = mlx_load_png("assets/box.png");
-	if (!xpm)
-		return ;
 	game->map.box_img = mlx_texture_to_image(game->mlx, xpm);
 	mlx_delete_texture(xpm);
-	if (!game->map.box_img)
-		return ;
 	mlx_resize_image(game->map.box_img, (TILE_SIZE + TILE_SIZE),
 		(TILE_SIZE - TILE_SIZE / 3));
 	mlx_image_to_window(game->mlx, game->map.box_img,

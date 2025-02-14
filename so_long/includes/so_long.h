@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:38:44 by pedro-hm          #+#    #+#             */
-/*   Updated: 2025/02/12 17:29:43 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:15:53 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ void	error_more_player_exit(t_game *game);
 void	free_images(t_game *game);
 void	error_map_route(t_game *game);
 void	error_route_is_not_valid(t_game *game);
+void	free_maps(t_game *game);
 
 #endif

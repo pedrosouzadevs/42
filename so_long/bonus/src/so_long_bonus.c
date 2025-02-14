@@ -6,7 +6,7 @@
 /*   By: pedro-hm <pedro-hm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:35:55 by pdro              #+#    #+#             */
-/*   Updated: 2025/02/12 16:54:55 by pedro-hm         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:02:32 by pedro-hm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,6 @@ int	main(int argc, char **argv)
 	mlx_loop(game->mlx);
 	free_game_resources(game);
 	return (0);
-}
-
-int	error_readeble_map(void)
-{
-	ft_printf("Error: map is not readeble\n");
-	return (EXIT_FAILURE);
 }
 
 void	put_player_enemy_in_map(t_game *game)
